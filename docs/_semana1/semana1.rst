@@ -3,7 +3,7 @@ SEMANA 1
 
 Presentación 
 -------------
-La presentación para esta semana está `aquí <https://drive.google.com/open?id=1_cYYPiFw6hK-xdMMPzDBKGVj47LzAwyYHQXOj0_MUwA>`.
+La presentación para esta semana está `aquí <https://drive.google.com/open?id=1_cYYPiFw6hK-xdMMPzDBKGVj47LzAwyYHQXOj0_MUwA>`__.
 
 Ejercicio 1
 ------------
