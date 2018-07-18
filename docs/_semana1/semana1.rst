@@ -1,66 +1,16 @@
 SEMANA 1
 ===========
 
-cap11
-^^^^^^
+Ejercicio 1
+------------
+Realizar la lectura del `capítulo 1 <https://docs.wixstatic.com/ugd/44046b_f2c9e41f0b204a34ab78be0ae4953128.pdf>`__ 
+del texto guía 
 
+Ejercicio 2
+------------
+Realizar la lectura del `apéndice A <https://docs.wixstatic.com/ugd/44046b_2cc5aac034ae49f4bf1650a3d31df32c.pdf>`__ 
+del texto guía.
 
-.. code:: cpp
-
-    #include <ESP8266WiFi.h>
-
-    void setup()
-    {
-    Serial.begin(115200);
-    Serial.println();
-
-    WiFi.begin("network-name", "pass-to-network");
-
-    Serial.print("Connecting");
-    while (WiFi.status() != WL_CONNECTED)
-    {
-        delay(500);
-        Serial.print(".");
-    }
-    Serial.println();
-
-    Serial.print("Connected, IP address: ");
-    Serial.println(WiFi.localIP());
-    }
-
-    void loop() {}
-
-Test
-
-cap12
-^^^^^^
-
-.. code:: cpp
-
-    #include <ESP8266WiFi.h>
-
-    void setup()
-    {
-    Serial.begin(115200);
-    Serial.println();
-
-    WiFi.begin("network-name", "pass-to-network");
-
-    Serial.print("Connecting");
-    while (WiFi.status() != WL_CONNECTED)
-    {
-        delay(500);
-        Serial.print(".");
-    }
-    Serial.println();
-
-    Serial.print("Connected, IP address: ");
-    Serial.println(WiFi.localIP());
-    }
-
-    void loop() {}
-
-More Code
-
-cap13
-^^^^^^
+Ejercicio 3
+------------
+Leer el `proyecto 1 <https://www.nand2tetris.org/project01>`__.
