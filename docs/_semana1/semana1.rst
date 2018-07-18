@@ -1,6 +1,10 @@
 SEMANA 1
 ===========
 
+Presentación 
+-------------
+La presentación para esta semana está `aquí <https://drive.google.com/open?id=1_cYYPiFw6hK-xdMMPzDBKGVj47LzAwyYHQXOj0_MUwA>`.
+
 Ejercicio 1
 ------------
 Realizar la lectura del `capítulo 1 <https://docs.wixstatic.com/ugd/44046b_f2c9e41f0b204a34ab78be0ae4953128.pdf>`__ 
