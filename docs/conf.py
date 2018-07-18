@@ -19,7 +19,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'Electrónica Digital'
+project = 'ELECTRONICA DIGITAL'
 copyright = '2018-20, Juan Franco'
 author = 'Juan Franco'
 
@@ -128,7 +128,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'electronicaDigital.tex', 'Electrónica digital',
+    (master_doc, 'electronicaDigital.tex', 'Electronica digital',
      'Juan Franco', 'manual'),
 ]
 
@@ -138,7 +138,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'electronicaDigital', 'Electrónica digital',
+    (master_doc, 'electronicaDigital', 'Electronica digital',
      [author], 1)
 ]
 
@@ -149,7 +149,7 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'electronicaDigital', 'Electrónica digital',
+    (master_doc, 'electronicaDigital', 'Electronica digital',
      author, 'electronicaDigital', 'One line description of project.',
      'Miscellaneous'),
 ]
