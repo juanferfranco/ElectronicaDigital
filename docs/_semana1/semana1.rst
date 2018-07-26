@@ -1,4 +1,4 @@
-SEMANA 1
+SEMANA 1/2
 ===========
 
 Presentación 
@@ -17,4 +17,4 @@ del texto guía.
 
 Ejercicio 3
 ------------
-Leer el `proyecto 1 <https://www.nand2tetris.org/project01>`__.
+Leer y realizar (comenzar) el `proyecto 1 <https://www.nand2tetris.org/project01>`__.

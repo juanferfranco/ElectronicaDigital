@@ -56,7 +56,7 @@ proyectos. Estos últimos también se trabajarán en el aula con asesoría del d
    :maxdepth: 3
    :caption: Contenidos:
 
-   Semana1 <_semana1/semana1>
+   Semana1,2 <_semana1/semana1>
    
    
 
