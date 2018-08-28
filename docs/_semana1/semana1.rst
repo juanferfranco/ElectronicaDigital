@@ -1,4 +1,4 @@
-SEMANA 1/2
+SEMANA 1
 ===========
 
 Presentación 
