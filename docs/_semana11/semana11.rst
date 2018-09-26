@@ -56,10 +56,12 @@ Ejercicios de python utilizando micropython
 * ¿Cuál es el resultado de hacer mi_nombre*2?
 * ¿Cuál es el resultado de hacer mi_nombre + 'UPB'
 * Cuál es el resultado de hacer 
+
   .. code-block:: python
 
      s = 'Hola'
      s[0] = R
+     
 * Cree una lista. Cambie uno de los valores de la lista. ¿Qué puede concluir de las listas en relación a las cadenas?
 * Cree una matriz de 3x3 utilizando una lista.
 * Para los siguientes ejercicios asuma ``A = 0 0 1 1 1 1 0 0`` , ``B = 1 1 0 0 1 1 0 1``
