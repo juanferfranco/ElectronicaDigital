@@ -61,7 +61,7 @@ Ejercicios de python utilizando micropython
 
      s = 'Hola'
      s[0] = R
-     
+
 * Cree una lista. Cambie uno de los valores de la lista. ¿Qué puede concluir de las listas en relación a las cadenas?
 * Cree una matriz de 3x3 utilizando una lista.
 * Para los siguientes ejercicios asuma ``A = 0 0 1 1 1 1 0 0`` , ``B = 1 1 0 0 1 1 0 1``
@@ -347,7 +347,7 @@ En resumen, el flujo de trabajo será así:
 4. Si desea que el programa corra automáticamente cada que la tarjeta se encienda utilice ``ampy`` con el comando ``puy`` 
    salvando el archivo con el nombre ``main.py``
 
-Ejercicio: retos
+RETOS
 -----------------
 El propósito de estos ejercicios será practicar lo aprendido hasta ahora:
 
@@ -370,6 +370,266 @@ Escriba un programa que permita calcular: suma, resta, multiplicación y divisi�
 la operación y los operandos. Luego de una operación, el programa debe preguntar si se desea continuar, de lo contrario 
 se debe terminar.
 
-Ejercicio: capacidades de entrada-salida del ESP8266 y micropython
--------------------------------------------------------------------
+Ejercicio: salida digital
+---------------------------
+
+La tarjeta ESP8266 que tenemos posee dos LEDs como muestra la figura:
+
+.. image:: ../_static/ESP8266.jpeg
+   :scale: 60%
+
+Las siguientes figuras servirán como referencia para entender el funcionamiento del hardware y los puertos de entrada/salida 
+de la tarjeta. El plano es similar al de la tarjeta que estamos utilizando, pero no es igual. En particular, la interfaz 
+USB a serial no es la misma.
+
+.. image:: ../_static/schematic.jpeg
+   :scale: 80%
+
+.. image:: ../_static/pinout.jpeg 
+   :scale: 60%
+
+Ambos LEDs se enciende con 0V y se apagan con 3.3V. Para controlar los LEDs o cualquier otro puerto de entrada/salida 
+se utiliza la biblioteca ``machine``. Para probar los LED escriba las siguientes líneas de código en la interfaz REPL
+
+   .. code-block:: python
+
+      import machine
+      pin1 = machine.Pin(2,machine.Pin.OUT)
+      pin2 = machine.Pin(16,machine.Pin.OUT)
+      pin1.on()
+      pin2.on()
+      pin1.off()
+      pin2.off()
+
+La línea ``import machine`` importa la biblioteca machine. Los puertos de GPIO son 
+configurables como entrada o como salida. La línea ``machine.Pin(16,machine.Pin.OUT)`` configura el puerto GPIO16 como salida.
+Finalmente, ``pin2.on()`` colocará 3.3V en el puerto GPIO16 y por tanto el LED se apagará. ``pin2.off()`` colocará 0V en 
+GPIO16 y el LED se encenderá. Este comportamiento puede entenderse analizando el diagrama del LED en el plano de la tarjeta:
+
+.. image:: ../_static/led.jpeg
+   :scale: 100%
+
+Ejercicio: entrada digital
+---------------------------
+Si queremos leer información digital del mundo exterior, tendremos que configurar el puerto como entrada. Tenga en cuenta que
+el voltaje máximo de entrada debe ser 3.3V y el mínimo 0V. El siguiente código permitirá leer el estado del puerto GPIO0:
+
+   .. code-block:: python
+      
+      import machine
+      pin0 = machine.Pin(0,machine.Pin.IN)
+      pin0.value()
+
+La línea ``pin0 = machine.Pin(0,machine.Pin.IN)`` configurará el puerto GPIO0 como entrada. Con a línea ``pin0.value()`` 
+se podrá leer el valor del puerto. Si el voltaje es 3.3V el resultado será 1 y el voltaje es de 0V el resultado será 0.
+Presione y mantega presionado el pulsador marcado con la palabra flash. Sin dejar de presionar el pulsados, ejecute de nuevo 
+``pin0.value()``. ¿Cuál es el resultado.
+
+RETO 5:
+-------
+Realice un programa que prenda y apague el LED conectado en el puerto GPIO16 mediante la lectura del pulsador conectado en 
+el puerto GPIO0. Si presiona el pulsador el LED debe encenderse. Si el pulsador se libera, el LED debe apagarse.
+
+Ejercicio: manejo del tiempo
+-----------------------------
+El manejo del tiempo se puede realizar utilizando la biblioteca `utime`. 
+En este `sitio <https://docs.micropython.org/en/latest/esp8266/library/utime.html>`__ 
+se puede encontrar la documentación.
+
+El siguiente código encenderá y apagará el LED conectado a GPIO2 a una frecuencia de 1Hz:
+
+   .. code-block:: python
+      
+      import machine
+      import utime
+      pin = machine.Pin(2,machine.Pin.OUT)
+
+      def toggle_led():
+        pin.on()
+        utime.sleep_ms(500)
+        pin.off()
+        utime.sleep_ms(500)
+    
+      while True:
+        toggle_led()
+      
+RETO 6:
+--------
+Realice un programa que al presionar y soltar una vez el pulsador, conectado a GPIO0, encieda y apague el led, conectado a 
+GPIO16, a una frecuencia de 0.5Hz. Al presionar y soltar de nuevo el pulsador el LED se debe apagar. El ciclo se repite 
+infinitamente. 
+
+RETO 7: 
+--------
+Del reto anterior habrá notado que mientras el programa está ejecutando la función ``utime.sleep_ms`` no podrá leer el estado
+del pulsador conectado a GPIO0 y por tanto se perderán eventos. Este comportamiento no es deseable y por tanto se deben 
+emplear otras técnicas que permitan programar eventos temporales sin perder la capacidad de respuesta del sistema.
+
+La biblioteca utime ofrece el método ``utime.ticks_diff(ticks1, ticks2)`` que permite calcular la diferencia entre dos 
+intervalos de tiempo así: ``ticks1 - ticks2``. Analice el funcionamiento del siguiente ejemplo:
+
+.. code-block:: python
+
+    from machine import Pin
+    from utime import ticks_ms,ticks_diff
+
+    pin = Pin(16, Pin.OUT)
+    pin.value(0)
+
+    startTime = ticks_ms()
+    pinState = 0
+    while True:
+        now =  ticks_ms()
+        if ticks_diff(now,startTime) > 500:
+            startTime = now
+            if pinState == 0:
+                pin.value(1)
+                pinState = 1
+            else:
+                pin.value(0)
+                pinState = 0
+
+RETO 8:
+--------
+Utilizando el método ``utime.ticks_diff(ticks1, ticks2)`` reimplemente el programa del reto anterior de tal forma que 
+solucione los problemas de capacidad de respuesta a eventos externos al sistema.
+
+
+.. note::
+
+   ¡ALERTA DE SPOILER!
+
+
+
+Ejercicio: solución a los dos retos anteriores 
+-----------------------------------------------
+Analice la solución a los dos retos anteriores y concluya:
+
+.. code-block:: python
+
+    import utime
+    from machine import Pin 
+
+    pin16 = Pin(16, Pin.OUT)
+    pin0 = Pin(0,Pin.IN)
+
+    def toggle_led(value):
+        pin16.off()
+        utime.sleep_ms(value)
+        pin16.on()
+        utime.sleep_ms(value)
+
+    counter = 0
+    pulsadorState = 0
+    while True:
+        if pulsadorState == 0:
+            if pin0.value() == 0:
+                utime.sleep_ms(20)
+                pulsadorState = 1
+                print('falling edge')
+        if pulsadorState == 1:
+            if pin0.value() == 1:
+                utime.sleep_ms(20)
+                pulsadorState = 0
+                counter = counter + 1
+                print('rising edge')
+        if counter == 1:
+            toggle_led(1000)
+            print('toggle')
+        if counter == 2:
+            pin16.on()
+            counter = 0
+            print('off')
+
+
+.. code-block:: python
+
+    import utime
+    from machine import Pin 
+
+    pin16 = Pin(16, Pin.OUT)
+    pin0 = Pin(0,Pin.IN)
+
+    ticks1 = 0
+    pinState = 0 
+
+    def toggle_led(value):
+        global ticks1
+        global pinState
+        ticks2 = utime.ticks_ms()
+        if utime.ticks_diff(ticks1, ticks2) < 0:
+            if pinState == 0:
+                pin16.off()
+                pinState = 1
+            else:
+                pin16.on()
+                pinState = 0
+            ticks1 = utime.ticks_ms() + value
+
+    counter = 0
+    pulsadorState = 0
+
+    while True:
+        if pulsadorState == 0:
+            if pin0.value() == 0:
+                utime.sleep_ms(20)
+                pulsadorState = 1
+                print('falling edge')
+        if pulsadorState == 1:   
+            if pin0.value() == 1:
+                utime.sleep_ms(20)
+                pulsadorState = 0
+                counter = counter + 1
+                print('rising edge')
+                ticks1 = utime.ticks_ms()
+        if counter == 1:
+                toggle_led(1000)
+                print('toggle')
+        if counter == 2:
+            pin16.on()
+            pinState = 0
+            counter = 0
+            print('off')
+
+Ejercicio: entrada analógica
+----------------------------
+La tarjeta de desarrollo que estamos utilizando solo tiene disponible una entrada analógica, ``ADC0``. Esta entrada recibe
+valores entre 0V y 3.3V. `Micropython <https://docs.micropython.org/en/latest/esp8266/esp8266/tutorial/adc.html>`__ 
+entrega valores entre 0 y 1024 correspondientes a 0V y 3.3V
+
+Implemente el circuito que muestra la figura:
+
+.. image:: ../_static/potenciometer.jpeg
+
+Analice el siguiente código que ilustra como acceder a la entrada analógica. El programa imprime en la interfaz REPL el 
+voltaje ingresado en el puerto.
+
+.. code-block:: python
+
+    from machine import ADC
+    import utime
+    import math
+
+    adc = ADC(0)
+
+    while True:
+        value = adc.read()
+        print('adc value: {}'.format(value))
+        mV = (value*3300) / 1024
+        print('voltaje en mV: {}'.format(math.trunc(mV)))
+        utime.sleep(1)
+
+
+
+Ejercicio: Pulse Width Modulation (PWM)
+-----------------------------------------
+
+Ejercicio: clase Timer
+-----------------------
+
+Ejercicio: clase Real Time Clock (RTC)
+---------------------------------------
+
+Ejercicio: sensores con buses digitales
+----------------------------------------
 
