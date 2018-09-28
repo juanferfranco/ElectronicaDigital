@@ -499,8 +499,6 @@ solucione los problemas de capacidad de respuesta a eventos externos al sistema.
 
    ¡ALERTA DE SPOILER!
 
-
-
 Ejercicio: solución a los dos retos anteriores 
 -----------------------------------------------
 Analice la solución a los dos retos anteriores y concluya:
@@ -619,17 +617,89 @@ voltaje ingresado en el puerto.
         print('voltaje en mV: {}'.format(math.trunc(mV)))
         utime.sleep(1)
 
-
-
 Ejercicio: Pulse Width Modulation (PWM)
 -----------------------------------------
+La modulación por ancho de pulso es una técnica que permite simular una señal analógica mediante un salida digital. La 
+técnica consiste en hacer que la señal digital cambie de ON a OFF a muy alta velocidad. De esta manera el componente que esté 
+conenctado a la salida digital "verá" al promedio de la señal. Una aplicación típica es utilizar PWM para variar el brillo 
+e un LED. Si la frecuencia de la señal de PWM es lo suficientemente alta (mayor a 60 Hz) el ojo humano no será capaz de 
+detectar que el LED se está enciendo y apagando, por tanto, verá el promedio de la señal. El LED se observará más 
+brillante si la señal pasa más tiempo en ON que en OFF y menos brillante en el caso contrario. 
 
-Ejercicio: clase Timer
------------------------
+En el `ESP8266 con micropython <http://docs.micropython.org/en/latest/esp8266/esp8266/quickref.html#pwm-pulse-width-modulation>`__,
+es posible hacer PWM en todos los GPIO menos en el GPIO16. Si la aplicación tiene varias salidas de PWM, todas tendrán 
+la misma frecuencia que variará entre 1 Hz y 1000 Hz. El tiempo en ON o ``duty cycle`` se podrá variar de 0 (0%) a 
+1023 (100%).
+
+Monte el circuito que muestra la figura:
+
+.. image:: ../_static/rgb.jpeg
+
+.. image:: ../_static/ledRGB.jpeg
+   :scale: 60%
+
+Abra la interfaz REPL y ejecute los siguientes comandos:
+
+.. code-block:: python
+
+    from machine import Pin, PWM
+
+    red = PWM(Pin(5), freq=500, duty=0) 
+    green = PWM(Pin(4), freq=500, duty=0)
+    blue = PWM(Pin(0), freq=500, duty=0)
+
+Modifique el valor del ``duty cycle`` de los LEDs para conseguir diferentes colores, por ejemplo: ``red.duty(1023)``.
 
 Ejercicio: clase Real Time Clock (RTC)
 ---------------------------------------
+La clase real time clock es un reloj independiente que permite llevar la cuenta de la fecha y la hora. Analice el siguiente
+código:
+
+.. clode-block: python
+
+   from machine import RTC
+
+   rtc = RTC()
+   rtc.datetime((2018, 9, 28, 10, 30, 0, 0, 0))
+   print(rtc.datetime())
+
+El parámetro de ``datetime`` es una tupla cuyas 8 dimensiones son: año, mes, día, día de la semana, hora, minutos, 
+segundos, milisegundos. El día de la semana va de 0 a 6 comenzando por el lunes. milisegundos cuenta desde 0 hasta 
+999. Cuando ``datetime`` se llama sin argumentos, retorna una tupla de 8 dimensiones con la fecha y 
+la hora actuales.
 
 Ejercicio: sensores con buses digitales
 ----------------------------------------
+Para este ejercicio vamos a utilizar un sensor de temperatura, humedad y presión barométrica. El sensor es fabricado por 
+la empresa Bosh y la referencia es `BME280 <https://www.bosch-sensortec.com/bst/products/all_products/bme280>`__. Este 
+sensor utiliza un bus digital llamado ``I2C``. Este bus permite comunicar la tarjeta ESP8266 con el sensor por medio dos 
+cables llamados SCL (para el reloj) y SDA (para los datos).
 
+Antes de conectar el sensor al ESP8266, desconecte el cable USB para remover la alimentación. Debemos conectar el sensor así:
+
+======== =======
+ESP8266  BME280
+======== =======
+3.3V      VCC
+GND       GND
+SCL       GPIO5
+SDA       GPIO4
+======== =======
+
+En cuanto al software, vamos a utilizar esta `biblioteca <https://github.com/catdog2/mpy_bme280_esp8266>`__.
+
+Siga los siguientes pasos para probar el sensor:
+
+* Almacen la biblioteca bme280.py en la memoria del ESP8266: ``ampy --port COM? put bme280.py bme280.py``
+* Abra la interfaz REPL y escriba el siguiente programa:
+
+  .. code-block:: python
+
+     import machine
+     import bme280
+     i2c = machine.I2C(scl=machine.Pin(5), sda=machine.Pin(4))
+     bme = bme280.BME280(i2c=i2c)
+     print(bme.values)
+
+   bme.values devolverá una tupla con tres cadenas correspondientes a la temperatura, la presión barométrica y 
+   la humedad relativa: ``('25.94C', '842.59hPa', '50.85%')``.
