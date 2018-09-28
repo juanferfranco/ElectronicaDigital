@@ -682,8 +682,8 @@ ESP8266  BME280
 ======== =======
 3.3V      VCC
 GND       GND
-SCL       GPIO5
-SDA       GPIO4
+GPIO5     SCL       
+GPIO4     SDA     
 ======== =======
 
 En cuanto al software, vamos a utilizar esta `biblioteca <https://github.com/catdog2/mpy_bme280_esp8266>`__.
