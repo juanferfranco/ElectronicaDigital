@@ -1,6 +1,6 @@
 Semana 13
 ===========
-Esta semana terminaremos el último ejercicio de la semana 11 relacionado con la intergración de sensores y actuaodres 
+Esta semana terminaremos el último ejercicio de la semana 11 relacionado con la intergración de sensores y actuadores 
 utilizando buses digitales. Introduciremos también el uso del radio WiFi que posee el ESP8266. Este radio permitirá 
 conectarnos a internet.
 
