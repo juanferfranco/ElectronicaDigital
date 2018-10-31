@@ -135,3 +135,11 @@ Este ejemplo escrito para un ESP32 permite detectar la presencia de de un beacon
      }
      Serial.println("Scan done!");
    }
+
+Sensor de movimiento: PIR 
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* En `este <https://learn.adafruit.com/pir-passive-infrared-proximity-motion-sensor/how-pirs-work>`__ enlace podrán encontrar 
+  información acerca del funcionamiento y prueba de un sensor PIR.
+* En `este <https://www.didacticaselectronicas.com/index.php/sensores/sensor-de-movimiento,-pir-sensor,-pir-detail>`__ 
+  enlace se puede encontrar la información para comprar el sensor PIR.
