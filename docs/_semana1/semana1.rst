@@ -1,20 +1,29 @@
 SEMANA 1
 ===========
 
-Presentación 
--------------
-La presentación para esta semana está `aquí <https://drive.google.com/open?id=1_cYYPiFw6hK-xdMMPzDBKGVj47LzAwyYHQXOj0_MUwA>`__.
+Esta semana realizaremos la presentación del curso y comenzaremos a trabajar en el proyecto 1: compuertas lógicas.
 
 Ejercicio 1
 ------------
-Realizar la lectura del `capítulo 1 <https://docs.wixstatic.com/ugd/44046b_f2c9e41f0b204a34ab78be0ae4953128.pdf>`__ 
-del texto guía 
+
+Leer y realizar (comenzar) el `proyecto 1 <https://www.nand2tetris.org/project01>`__.
 
 Ejercicio 2
 ------------
-Realizar la lectura del `apéndice A <https://docs.wixstatic.com/ugd/44046b_2cc5aac034ae49f4bf1650a3d31df32c.pdf>`__ 
-del texto guía.
+
+Realizar la lectura del `capítulo 1 <https://docs.wixstatic.com/ugd/44046b_f2c9e41f0b204a34ab78be0ae4953128.pdf>`__ 
+del texto guía 
+
 
 Ejercicio 3
 ------------
-Leer y realizar (comenzar) el `proyecto 1 <https://www.nand2tetris.org/project01>`__.
+
+En casa: Realizar la lectura del `apéndice A <https://docs.wixstatic.com/ugd/44046b_2cc5aac034ae49f4bf1650a3d31df32c.pdf>`__ 
+  del texto guía.
+
+
+Ejercicio 4
+------------
+
+En casa: instalar la herramienta y terminar el proyecto 1
+

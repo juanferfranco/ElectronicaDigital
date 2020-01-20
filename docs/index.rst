@@ -1,4 +1,4 @@
-Electrónica digital 2018-20
+Electrónica digital 2020-10
 ==============================
 
 ¿Para qué sirve este curso?
@@ -29,7 +29,7 @@ Soluciona adecuadamente problemas utilizando los conocimientos previamente adqui
 
 Metodología del curso
 -----------------------------------
-Este curso está basado en la construcción de proyectos. La primer parte se basa 
+Este curso está basado en la construcción de proyectos. La primera parte se basa 
 en el curso from `Nand to Tetris <https://www.nand2tetris.org/>`__ diseñado e implementado por 
 los profesores Shimon Schocken y Noam Nisan en IDC `Herzliya <https://www.idc.ac.il/en/pages/home.aspx>`__.
 La segunda parte del curso se basa en proyectos de sistemas embebidos que buscan aplicar los fundamentos aprendidos 
@@ -37,14 +37,12 @@ en la primera parte.
 
 Cronograma
 ----------
-`Tabla de actividades <https://drive.google.com/open?id=1qZbo4Lr5k5YaIWwWDNnOl40FE2mB6u5Jsa70JDKCGQU>`__.
+`Tabla de actividades <https://docs.google.com/spreadsheets/d/16S5fAeRbrPM4EB35I5Z4s9O0tTIUHJZuMiafLGtrNvY/edit?usp=sharing>`__.
 
 Evaluación
 -----------
-Parcial teórico: 20% - Semana 8
-Parcial práctico: 20% - Semana 8
-Final teórico: 20% - Semana 16
-Trabajo Final: 40% - Semana 16
+Tres evaluaciones acumulativas del 20% cada una. Total: 60%
+Evaluación final: proyecto (20%) documentación (paper y video) 20%. Total 40%
 
 Dedicación
 ----------
@@ -57,19 +55,4 @@ proyectos. Estos últimos también se trabajarán en el aula con asesoría del d
    :caption: Contenidos:
 
    Semana1 <_semana1/semana1>
-   Semana2 <_semana2/semana2>
-   Semana3 <_semana3/semana3>
-   Semana4 <_semana4/semana4>
-   Semana5 <_semana5/semana5>
-   Semana6 <_semana6/semana6>
-   Semana7 <_semana7/semana7>
-   Semana8 <_semana8/semana8>
-   Semana9 <_semana9/semana9>
-   Semana10 <_semana10/semana10>
-   Semana11 <_semana11/semana11>
-   Semana12 <_semana12/semana12>
-   Semana13 <_semana13/semana13>
-   Semana14 <_semana14/semana14>
-   Semana15 <_semana15/semana15>
-   Semana16 <_semana16/semana16>
-   Semana18 <_semana18/semana18>
+   

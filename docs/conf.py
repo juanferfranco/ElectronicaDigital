@@ -20,13 +20,13 @@
 # -- Project information -----------------------------------------------------
 
 project = 'ELECTRONICA DIGITAL'
-copyright = '2018-20, Juan Franco'
+copyright = '2020-10, Juan Franco'
 author = 'Juan Franco'
 
 # The short X.Y version
 version = '0.0.1'
 # The full version, including alpha/beta/rc tags
-release = 'alpha'
+release = 'beta'
 
 
 # -- General configuration ---------------------------------------------------
