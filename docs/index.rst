@@ -41,8 +41,10 @@ Cronograma
 
 Evaluación
 -----------
-Tres evaluaciones acumulativas del 20% cada una. Total: 60%
-Evaluación final: proyecto (20%) documentación (paper y video) 20%. Total 40%
+
+* Tres evaluaciones acumulativas del 20% cada una. Total: 60%.
+
+* Evaluación final: proyecto (20%) documentación (paper y video) 20%. Total 40%.
 
 Dedicación
 ----------
@@ -55,4 +57,3 @@ proyectos. Estos últimos también se trabajarán en el aula con asesoría del d
    :caption: Contenidos:
 
    Semana1 <_semana1/semana1>
-   
