@@ -14,6 +14,9 @@ de los computadores** y los **sistemas embebidos**.
 
 Competencias
 -------------
+
+`Carta descriptiva del curso <https://drive.google.com/file/d/1CqEPTUXlj7JmDeGcOCdmteijLeE3LsOP/view?usp=sharing>`__.
+
 Razona lógicamente situaciones de ingeniería utilizando los conocimientos adquiridos en su formación, 
 para representar sistemas:
 
