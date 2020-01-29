@@ -4,7 +4,8 @@ Semana 2
 Objetivos
 ----------
 1. Desarrollar habilidades en la detección de errores.
-2. Construir circuitos combinacionales para hace operaciones lógicas y aritméticas.
+2. Construir circuitos combinacionales para hace operaciones
+   lógicas y aritméticas.
 3. Comprender la representación de los números negativos.
 
 Material

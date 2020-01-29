@@ -69,3 +69,4 @@ del docente.
    :caption: Contenidos:
 
    Semana1 <_semana1/semana1>
+   Semana2 <_semana2/semana2>  
