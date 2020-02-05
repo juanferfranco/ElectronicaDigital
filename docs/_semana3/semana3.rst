@@ -3,7 +3,7 @@ Semana 3
 
 Objetivos
 ----------
-1. Comprender el funcionamiento de los circuitos logicos secuenciales
+1. Comprender el funcionamiento de los circuitos lógicos secuenciales
 2. Construir circuitos lógicos secuenciales.
 
 Material
