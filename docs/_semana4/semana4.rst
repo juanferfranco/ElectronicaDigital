@@ -3,7 +3,7 @@ Semana 4
 
 Objetivo
 ----------
-Esta semana realizaremos las evaluaciones formativas y sumativas que
+Esta semana realizaremos las evaluaciones formativa y sumativa que
 buscan evaluar el proceso desde la semana 1 a la 3.
 
 Material
