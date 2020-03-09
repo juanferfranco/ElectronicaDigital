@@ -1,11 +1,19 @@
 Semana 8
 ===========
 
-Objetivos
+Esta semana vamos a cerrar la primera parte del curso
+con la evaluación sumativa número 2. En la sesión 2 de
+esta semana comenzaremos la segunda parte del curso
+donde introduciremos algunos conceptos básicos de sistemas
+embebidos y su programación.
+
+Sesión 1
 ----------
-1. Realizar la evaluación sumativa teórica
+
+En `este <https://docs.google.com/document/d/1aKixMWic4QawFH8-0q8V-wn_JIjS8GriS0FXaSBjCck/edit?usp=sharing>`__
+enlace está la evaluación sumativa 2.
 
 
-Material
----------
-El material de esta semana corresponde a la evaluación sumativa teórica de la primer parte del curso.
+Sesión 2
+----------
+
