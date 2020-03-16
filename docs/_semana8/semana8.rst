@@ -17,3 +17,4 @@ enlace está la evaluación sumativa 2.
 Sesión 2
 ----------
 
+En esta sesión realizaremos una acción de mejora para la evaluación 2.
