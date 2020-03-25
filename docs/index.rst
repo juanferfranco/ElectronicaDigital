@@ -51,10 +51,7 @@ Cronograma
 Evaluación
 -----------
 
-* Tres evaluaciones acumulativas del 20% cada una. Total: 60%.
-
-* Evaluación final: proyecto (20%) documentación (paper y video) 20%.
-  Total 40%.
+* Se realizarán evaluaciones parciales sumativas así: 20%, 20%, 25%, 25% y 10%
 
 Dedicación
 ----------
@@ -77,4 +74,5 @@ del docente.
    Semana7 <_semana7/semana7>
    Semana8 <_semana8/semana8>
    Semana9 <_semana9/semana9>
+   Semana10 <_semana10/semana10>
 
