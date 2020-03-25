@@ -78,6 +78,9 @@ que ofrece el API de arduino:
 
     map(value, fromLow, fromHigh, toLow, toHigh)
 
+NOTA: para el ESP32 se debe usar una función diferente para el PWM. Ver el
+`este <https://techexplorations.com/guides/esp32/begin/pwm/>`__ enlace.
+
 Ejercicio 3:
 --------------
 Analice el siguiente código:
@@ -233,10 +236,7 @@ Analice el siguiente ejemplo oficial de Arduino:
         digitalWrite(ledPins[thisPin], LOW);
     
       }
-    
-      // loop from the highest pin to the lowest:
-      for (int thisPin = pinCount - 1; thisPin >= 0; thisPin--) {
-        // turn the pin on:
+    https://techexplorations.com/guides/esp32/begin/pwm/
         digitalWrite(ledPins[thisPin], HIGH);
         delay(timer);
         // turn the pin off:
