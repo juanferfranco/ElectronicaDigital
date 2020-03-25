@@ -55,11 +55,6 @@ Analice el siguiente ejemplo:
 
     }
 
-
-En este caso map toma fromLow y lo convierte a toLow y
-fromHigh y lo convierte a toHigh. Los valores intermedios son mapeados de
-manera lineal.
-
 Ejercicio 2: RETO 1
 --------------------
 Monte un circuito (en tinkercad) y realice un programa que permita controlar
@@ -77,6 +72,10 @@ que ofrece el API de arduino:
    :lineno-start: 1
 
     map(value, fromLow, fromHigh, toLow, toHigh)
+
+En este caso map toma fromLow y lo convierte a toLow y
+fromHigh y lo convierte a toHigh. Los valores intermedios son mapeados de
+manera lineal.
 
 NOTA: para el ESP32 se debe usar una función diferente para el PWM. Ver el
 `este <https://techexplorations.com/guides/esp32/begin/pwm/>`__ enlace.
@@ -150,14 +149,12 @@ Ahora compare con este otro código:
 
     }
 
-
     void loop() {
       static uint8_t counter = 20;
       counter++;
-	  Serial.print("Counter in loop: ");
+	    Serial.print("Counter in loop: ");
       Serial.println(counter);
       incCounter();
-      4
       Serial.print("Counter outside loop: ");
       Serial.println(::counter);
       ::counter++;
@@ -174,7 +171,7 @@ Analizar el siguiente ejemplo:
 .. code-block:: cpp
    :lineno-start: 1
 
-    const uint8_t ledPin =  3
+    const uint8_t ledPin =  3;
     uint8_t ledState = LOW;
     uint32_t previousMillis = 0;
     const uint32_t interval = 1000;
@@ -212,11 +209,33 @@ Analice el siguiente ejemplo oficial de Arduino:
 .. code-block:: cpp
    :lineno-start: 1    
     
-    int timer = 100;    // The higher the number, the slower the timing.
+    /*
+      Arrays
+    
+      Demonstrates the use of an array to hold pin numbers in order to iterate over
+      the pins in a sequence. Lights multiple LEDs in sequence, then in reverse.
+    
+      Unlike the For Loop tutorial, where the pins have to be contiguous, here the
+      pins can be in any random order.
+    
+      The circuit:
+      - LEDs from pins 2 through 7 to ground
+    
+      created 2006
+      by David A. Mellis
+      modified 30 Aug 2011
+      by Tom Igoe
+    
+      This example code is in the public domain.
+    
+      http://www.arduino.cc/en/Tutorial/Array
+    */
+    
+    int timer = 100;           // The higher the number, the slower the timing.
     int ledPins[] = {
       2, 7, 4, 6, 5, 3
-    };                  // an array of pin numbers to which LEDs are attached
-    int pinCount = 6;   // the number of pins (i.e. the length of the array)
+    };       // an array of pin numbers to which LEDs are attached
+    int pinCount = 6;           // the number of pins (i.e. the length of the array)
     
     void setup() {
       // the array elements are numbered from 0 to (pinCount - 1).
@@ -236,7 +255,10 @@ Analice el siguiente ejemplo oficial de Arduino:
         digitalWrite(ledPins[thisPin], LOW);
     
       }
-    https://techexplorations.com/guides/esp32/begin/pwm/
+    
+      // loop from the highest pin to the lowest:
+      for (int thisPin = pinCount - 1; thisPin >= 0; thisPin--) {
+        // turn the pin on:
         digitalWrite(ledPins[thisPin], HIGH);
         delay(timer);
         // turn the pin off:
