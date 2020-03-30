@@ -137,7 +137,7 @@ todas las tareas así:
 .. code-block:: cpp
    :lineno-start: 1 
 
-	void task1(){
+	  void task1(){
     .
     .
     .
@@ -368,8 +368,7 @@ Ahora si podemos definir cada objeto:
    :lineno-start: 1
 
     void task2(){
-        static LED led(5, 1360);^^^^^^^^^^^^^ que modificará cada variable
-del objeto.
+        static LED led(5, 1360);
 
 .. code-block:: cpp
    :lineno-start: 1
