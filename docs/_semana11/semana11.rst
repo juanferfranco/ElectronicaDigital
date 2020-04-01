@@ -587,3 +587,8 @@ Ejercicio 7: RETO
 El reto de esta semana no será un ejercicio, PERO ES MUY IMPORTANTE.
 Se trata de estudiar detalladamente el material introducido en la sesión
 1.
+
+Sesión 2
+-----------
+Vamos a realizar la evaluación sumativa 3 que está
+`aquí <https://docs.google.com/document/d/1LCJw8V0Hko-zUdyKshixDFOVOmyBaEhEgZl7WGJJ42k/edit?usp=sharing>`__.
