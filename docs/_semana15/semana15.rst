@@ -1,71 +1,258 @@
 Semana 15
 ===========
-Durante esta semana haremos dos ejercicios. Primero, vamos a enviar a un servidor en internet los valores de varios sensores. Segundo, 
-vamos controlar de manera remota un actuador.
 
-Objetivos
-----------
-1. Enviar información de un sensor a un servidor en internet.
-2. Modificar de manera remota el estado de un actuador.
+Esta semana vamos a trabajar en otro protocolo de transporte que nos permite
+conectar sensores y actuadores en red inalámbrica. Se trata de UDP (la semana
+pasada trabajamos TCP).
 
-Ejercicios
+Sesión 1
 -----------
-Los siguientes ejercicios vamos a realizarlos utilizando la plataforma Adafruit IO. La comunicación entre el ESP8266 y el servicio de 
-Adafruit IO la ralizaremos utilizando TCP/IP y el protocolo MQTT. El primer paso para entender los ejercicios es leer la información 
-de `este enlace <https://learn.adafruit.com/mqtt-adafruit-io-and-you/overview>`__.
+La semana anterior utilizamos TCP/IP y el modelo cliente servidor para 
+integrar sensores y actuadores utilizando WiFi. En ests sesión vamos a utilizar el protocolo 
+UDP.
 
-¿Cuáles son los problemas de HTTP (REST)?
-¿Qué ventajas tiene MQTT sobre HTTP (REST)?
-¿Qué es un Broker MQTT?
-¿Cuál es la función del Broker MQTT?
+Objetivo de la sesión
+^^^^^^^^^^^^^^^^^^^^^^^
 
-Ejercicio: crear una cuenta en Adafruit IO
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Ingrese al siguiente `sitio <https://io.adafruit.com>`__ y cree una cuenta en el MQTT Broker de Adafruit.
+Integrar sensores y actuadores con dispositivos de cómputo utilizando WiFi y el protocolo UDP.
 
-Tome nota de su nombre de usuario de cuenta y su clave o KEY. Dicha clave será utilizada por todos sus dispositivos para autenticarse con 
-Adafruit IO.
+Ejercicio: analizar el código
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-¿Qué es un Feed? ¿Para qué sirve?
+Para explorar `UDP <https://www.arduino.cc/en/Reference/WiFi>`__ vamos a realizar un proyecto 
+simple que ilustra el uso del protocolo. Se trata de un conjunto de actuadores distribuidos 
+en el espacio y un coordinar central, un PC. Cada actuador enciende y 
+apaga un puerto de entrada salida según lo indique el comando, que se recibe por UDP, y que será 
+enviado por el coordinador central. El coordinador cuenta con un dispositivo, que llamaremos 
+bridge, quien recibirá por serial los comandos y los reenviará por UDP a los actuadores 
+distribuidos.
 
-¿Puedo utilizar MQTT para acceder al historial de un feed?
+El protocolo de comunicación serial es simple. Se trata de un protocolo ascii compuesto por 
+tres caracteres. El primer carácter indica a cual actuador se enviará el comando. 
+El segundo carácter el estado deseado para la salida ('1' on, '0' off). Por último, 
+se envía un carácter de sincronización ('*').
 
-Ejercicio: creación de feeds
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Cree un feed para cada una de las variables: temperatura, humedad, presión barométrica, pulsador.
-Cree un feed llamdo onoff para controlar remotamente una salida digital que visulizaremos mediante un LED.
+El código del bridge es el siguiente:
 
-Ejercicio: creación de un dashboard
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Para los feeds temperatura, humedad y presión barométrica cree gauges.
-Para el pulsador creen un indicador luminoso.
-Para el control onoff cree un suiche deslizante.
+.. code-block:: cpp
+   :lineno-start: 1
+   
+   #include <WiFi.h>
+   #include <WiFiUdp.h>
+   
+   const char* ssid = "?";
+   const char* password = "?";
+   WiFiUDP udpDevice;
+   uint16_t localUdpPort = ?;
+   uint16_t UDPPort = ?;
+   #define MAX_LEDSERVERS 3
+   const char* hosts[MAX_LEDSERVERS] = {"?.?.?.?", "?.?.?.?", "?.?.?.?"};
+   #define SERIALMESSAGESIZE 3
+   uint32_t previousMillis = 0;
+   #define ALIVE 1000
+   #define D0 5
+   
+   void setup() {
+     pinMode(D0, OUTPUT);     // Initialize the LED_BUILTIN pin as an output
+     digitalWrite(D0, HIGH);
+     Serial.begin(115200);
+     Serial.println();
+     Serial.println();
+     Serial.print("Connecting to ");
+     Serial.println(ssid);
+   
+     WiFi.mode(WIFI_STA);
+     WiFi.begin(ssid, password);
+   
+     while (WiFi.status() != WL_CONNECTED) {
+       delay(500);
+       Serial.print(".");
+     }
+     Serial.println("");
+     Serial.println("WiFi connected");
+     // Print the IP address
+     Serial.println(WiFi.localIP());
+     udpDevice.begin(localUdpPort);
+   }
+   
+   void networkTask() {
+     uint8_t LEDServer = 0;
+     uint8_t LEDValue = 0;
+     uint8_t syncChar;
+   
+     // Serial event:
+     if (Serial.available() >= SERIALMESSAGESIZE) {
+       LEDServer = Serial.read() - '0';
+       LEDValue = Serial.read();
+       syncChar = Serial.read();
+       if ((LEDServer == 0) || (LEDServer > 3)) {
+         Serial.println("Servidor inválido (seleccione 1,2,3)");
+         return;
+       }
+       if (syncChar == '*') {
+         udpDevice.beginPacket(hosts[LEDServer - 1] , UDPPort);
+         udpDevice.write(LEDValue);
+         udpDevice.endPacket();
+       }
+     }
+     // UDP event:
+     uint8_t packetSize = udpDevice.parsePacket();
+     if (packetSize) {
+       Serial.print("Data from: ");
+       Serial.print(udpDevice.remoteIP());
+       Serial.print(":");
+       Serial.print(udpDevice.remotePort());
+       Serial.print(' ');
+       for (uint8_t i = 0; i < packetSize; i++) {
+         Serial.write(udpDevice.read());
+       }
+     }
+   }
+   
+   void aliveTask() {
+     uint32_t currentMillis;
+     static uint8_t ledState = 0;
+     currentMillis  = millis();
+     if ((currentMillis - previousMillis) >= ALIVE) {
+       previousMillis = currentMillis;
+       if (ledState == 0) {
+         digitalWrite(D0, HIGH);
+         ledState = 1;
+       }
+       else {
+         digitalWrite(D0, LOW);
+         ledState = 0;
+       }
+     }
+   }
+   
+   void loop() {
+     networkTask();
+     aliveTask();
+   }
 
-Ejercicio: instale la biblioteca MQTT
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Utilice el gestor de bibliotecas de arduino, como en la práctica realizada para el sensor BME280, para 
-instalar la biblioteca Adafruit MQTT. Esta biblioteca le permitirá al ESP8266 hablar el protocolo MQTT.
+Note que a diferencia de TCP/IP, con UDP no es necesario establecer una conexión. Los pasos 
+necesario para enviar datos por UDP serán:
 
-Ejercicio: pruebe la comunicación
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Cargue el ejemplo MQTT_ESP8266. No olvide configurar: la red WiFi, su nombre de usuario y KEY. Modifique el feed photocell
-por alguno de los correspondientes con temperatura, humedad, presión barométrica o pulsador. Verifique que el feed onoff
-es igual al que usted creó (nombre 100% idéntico). En MQTT los dispositivos se suscriben al feed que les interesa y publican al feed 
-que desean actualizar. 
+* Crear un objeto WiFiUDP
+* Iniciar el objeto estableciendo un socket compuesto por la dirección IP y el puerto de escucha.
+* Iniciar la construcción del paquete a transmitir con beginPacket(), 
+* Popular el buffer de transmisión con write.
+* Enviar el paquete con endPacket().
 
-No olvide abrir el dashboard para verificar el funcionamieto de la aplicación.
+El código de los actuadores distribuidos será:
 
-Ejercicio: sensores y actuador MQTT
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Modifque el ejemplo anterior considerando todos los feeds creados.
+.. code-block:: cpp
+   :lineno-start: 1
 
-Ejercicio: QoS
-^^^^^^^^^^^^^^^
-¿Qué es la calidad del servicio en MQTT? ¿Cuándo podría ser importante?
+    #include <WiFi.h>
+    #include <WiFiUdp.h>
 
-Ejercicio: conecte Adafruit io a IFTTT
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Verifique el siguiente `proyecto <https://learn.adafruit.com/using-ifttt-with-adafruit-io/overview>`__ que ilustra cómo conectar 
-IFTTT con adafruit io.
+    const char* ssid = "?";
+    const char* password = "?";
+    WiFiUDP udpDevice;
+    uint16_t localUdpPort = ?;
+    uint32_t previousMillis = 0;
+    #define ALIVE 1000
+    #define D0 5
+    #define D8 18
+
+    void setup() {
+        pinMode(D0, OUTPUT);     // Initialize the LED_BUILTIN pin as an output
+        digitalWrite(D0, HIGH);
+        pinMode(D8, OUTPUT);     
+        digitalWrite(D8, LOW);
+        Serial.begin(115200);
+        Serial.println();
+        Serial.println();
+        Serial.print("Connecting to ");
+        Serial.println(ssid);
+
+        WiFi.mode(WIFI_STA);
+        WiFi.begin(ssid, password);
+
+        while (WiFi.status() != WL_CONNECTED) {
+            delay(500);
+            Serial.print(".");
+        }
+        Serial.println("");
+        Serial.println("WiFi connected");
+        // Print the IP address
+        Serial.println(WiFi.localIP());
+        udpDevice.begin(localUdpPort);
+    }
 
 
+    void networkTask() {
+        uint8_t data;
+        uint8_t packetSize = udpDevice.parsePacket();
+        if (packetSize) {
+            data = udpDevice.read();
+            if (data == '1') {
+                digitalWrite(D0, HIGH);
+            } else if (data == '0') {
+                digitalWrite(D0, LOW);
+            }
+            // send back a reply, to the IP address and port we got the packet from
+            udpDevice.beginPacket(udpDevice.remoteIP(), udpDevice.remotePort());
+            udpDevice.write('1');
+            udpDevice .endPacket();
+        }
+    }
+
+    void aliveTask() {
+        uint32_t currentMillis;
+        static uint8_t ledState = 0;
+        currentMillis  = millis();
+        if ((currentMillis - previousMillis) >= ALIVE) {
+            previousMillis = currentMillis;
+            if (ledState == 0) digitalWrite(D8, HIGH);
+            else digitalWrite(D8, LOW);
+        }
+    }
+
+    void loop() {
+        networkTask();
+        aliveTask();
+    }
+
+Los pasos para recibir datos por UDP son:
+
+* Crear un objeto WiFiUDP
+* Iniciar el objeto estableciendo un socket compuesto por la dirección IP y el puerto de escucha.
+* Procesar el siguiente paquete UDP con parsePacket(). Esta acción devolverá el tamaño del paquete en bytes.
+* Luego de llamar parsePacket() será posible utilizar los métodos read() y available().
+* Leer el paquete.
+
+En el ejemplo mostrado, note que un actuador distribuido responderá al bridge con el carácter '1' cada que reciba un 
+paquete. De esta manera el bridge sabrá que el dato llegó a su destino.
+
+Ejercicio: despliegue del ejercicio
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Para desplegar este ejercicio necesitamos varios dispositivos: PC, ESP32.
+
+Para desplegar el ejercicio es necesario identificar claramente las direcciones IP de cada 
+uno de los actuadores remotos.
+
+Utilice un ESP32 para cada actuador y un ESP32 para el bridge. Como en este caso no contamos
+con tantos dispositivos entonces:
+
+* Usar el ESP32 como bridge y como actuadores el celular y el computador.
+* Utilice los programas Hercules para simular la aplicación del PC y los actuadores.
+
+Sesión 2
+---------
+En esta sesión vamos a practicar las comunicaciones por UDP.
+
+RETO 
+^^^^^^
+Se trata de un programa en el PC que se comunica con un controlador ESP32. El controlador
+tiene conectados un sensor y un actuador.
+
+* Utilizar como referencia los códigos de la sesión 1.
+* Use hércules para simular un programa en el computador que solicitará al controlador
+  leer su sensor y modificar el actuador.
+* El ESP32 tendrá conectado un suiche (sensor) y un LED (actuador).
+* Desde el programa del PC debemos leer el valor del sensor y cambiar el estado del LED
+* Usted debe definir el protocolo que utilizará (por encima de UDP). Puede seleccionar 
+  entre un protocolo binario o ascii.
