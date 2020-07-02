@@ -76,7 +76,7 @@ Cada unidad tiene una duración de 2 semanas distribuidas así:
 
 Cronograma
 ----------
-`Tabla de actividades <https://docs.google.com/spreadsheets/d/16S5fAeRbrPM4EB35I5Z4s9O0tTIUHJZuMiafLGtrNvY/edit?usp=sharing>`__.
+`Tabla de actividades <https://docs.google.com/spreadsheets/d/1CWnkmZ81yPJGt2k-UgWAvOGcdyeIH8BjM7Rx5F9-u-k/edit?usp=sharing>`__.
 
 Evaluación
 -----------
