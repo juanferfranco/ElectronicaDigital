@@ -1,5 +1,11 @@
-Electrónica digital 2020-10
+Electrónica digital 2020-20
 ==============================
+
+Docente diseñador del curso: Juan Fernando Franco Higuita
+
+Nombre del docente moderador: Juan Fernando Franco Higuita
+
+Créditos y horas totales del curso: 3 créditos - 144 horas totales
 
 ¿Para qué sirve este curso?
 -----------------------------
@@ -44,22 +50,44 @@ en IDC `Herzliya <https://www.idc.ac.il/en/pages/home.aspx>`__.
 La segunda parte del curso se basa en proyectos de sistemas embebidos que
 buscan aplicar los fundamentos aprendidos en la primera parte.
 
+Contenido
+----------
+El curso está estructurado en 8 unidades. Cada unidad dura 2 semanas.
+
+#. Unidad 1: compuertas.
+#. Unidad 2: circuitos combinacionales.
+#. Unidad 3: circuitos secuenciales.
+#. Unidad 4: lenguaje de máquina.
+#. Unidad 5: arquitectura.
+#. Unidad 6: introducción a los sistemas embebidos: plataforma, lenguaje de programación C/C++
+#. Unidad 7: comunicaciones seriales.
+#. Unidad 8: máquinas de estado
+
+Estructura de cada unidad
+--------------------------
+Cada unidad tiene una duración de 2 semanas distribuidas así:
+
+#. Sesión de introducción a la unidad: 1 hora 40 minutos
+#. Trabajo autónomo en los fundamentos e inicio de proyecto: 5 horas
+#. Sesión de asesoría para los fundamentos y el proyecto: 1 hora 40 minutos
+#. Sesión de asesoría para el proyecto: 1 hora 40 minutos
+#. Trabajo autónomo para finalizar y sustentar el proyecto: 5 horas
+#. Sesión de retroalimentación y solución de dudas: 1 hora 40 minutos
+
 Cronograma
 ----------
 `Tabla de actividades <https://docs.google.com/spreadsheets/d/16S5fAeRbrPM4EB35I5Z4s9O0tTIUHJZuMiafLGtrNvY/edit?usp=sharing>`__.
 
 Evaluación
 -----------
-
-* Se realizarán evaluaciones parciales sumativas así: 20%, 20%, 25%, 25% y 10%
+Se realizarán 8 evaluaciones del 12.5% cada una correspondientes a cada unidad.
 
 Dedicación
 ----------
-Este curso es de 3 créditos repartidos en 4 horas de trabajo en el aula
-y 5 horas de trabajo autónomo. En las horas de trabajo autónomo se debe
-leer el texto guía y el material sugerido, así mismo, trabajar en los
-proyectos. Estos últimos también se trabajarán en el aula con asesoría
-del docente.
+Este curso es de 3 créditos repartidos en 4 horas de trabajo sincrónico mediado por TIC
+5 horas de trabajo autónomo. En las horas de trabajo autónomo se debe
+leer el texto guía y/o el material sugerido, así mismo, trabajar en los
+proyectos. 
 
 .. toctree::
    :maxdepth: 3
@@ -67,17 +95,3 @@ del docente.
 
    Semana1 <_semana1/semana1>
    Semana2 <_semana2/semana2>
-   Semana3 <_semana3/semana3>
-   Semana4 <_semana4/semana4>
-   Semana5 <_semana5/semana5>
-   Semana6 <_semana6/semana6>
-   Semana7 <_semana7/semana7>
-   Semana8 <_semana8/semana8>
-   Semana9 <_semana9/semana9>
-   Semana10 <_semana10/semana10>
-   Semana11 <_semana11/semana11>
-   Semana12 <_semana12/semana12>
-   Semana13 <_semana13/semana13>
-   Semana14 <_semana14/semana14>
-   Semana15 <_semana15/semana15>
-   Semana16 <_semana16/semana16>
