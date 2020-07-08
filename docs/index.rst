@@ -59,9 +59,9 @@ El curso está estructurado en 8 unidades. Cada unidad dura 2 semanas.
 #. Unidad 3: circuitos secuenciales.
 #. Unidad 4: lenguaje de máquina.
 #. Unidad 5: arquitectura.
-#. Unidad 6: introducción a los sistemas embebidos: plataforma, lenguaje de programación C/C++
+#. Unidad 6: introducción a los sistemas embebidos: plataforma, lenguaje de programación C/C++.
 #. Unidad 7: comunicaciones seriales.
-#. Unidad 8: máquinas de estado
+#. Unidad 8: máquinas de estado.
 
 Estructura de cada unidad
 --------------------------
