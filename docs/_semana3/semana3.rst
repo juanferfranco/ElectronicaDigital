@@ -1,6 +1,12 @@
 Semana 3
 ===========
 
+Unidad 1: circuitos combinacionales
+------------------------------------
+
+Actividades
+^^^^^^^^^^^^
+
 Actividad 6
 *************
 Esta es la última activada de la unidad 1.
