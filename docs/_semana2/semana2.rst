@@ -9,7 +9,7 @@ Actividades
 
 Actividad 4
 *************
-* Fecha: julio 15 de 2020 - 8 a.m.
+* Fecha: julio 17 de 2020 - 8 a.m.
 * Descripción: asiste al encuentro sincrónico para resolver dudas en tiempo real con el docente.
 * Recursos: 
 
@@ -19,9 +19,10 @@ Actividad 4
 * Duración de la actividad: 1:40 minutos sincrónicos.
 * Forma de trabajo: grupal
 
+
 Actividad 5
 ************
-* Fecha: julio 13 a julio 17 de 2020.
+* Fecha: julio 17 a julio 22 de 2020.
 * Descripción: terminación del proyecto y sustentación
 * Recursos: 
 
@@ -68,15 +69,3 @@ Actividad 5
   definidos.
 * Tus explicaciones deben ser claras, precisas y completas. No olvides planear 
   bien tu video de sustentación.
-
-Actividad 6
-*************
-* Fecha: julio 17 de 2020 - 8 a.m.
-* Descripción: encuentro sincrónico para compartir y discutir los resultados del reto de la semana 1
-* Recursos: ingresa al grupo de `Teams <https://teams.microsoft.com/l/team/19%3a0568a505122249d19fb06bb1e2e466db%40thread.tacv2/conversations?groupId=dd8eb7ac-0f31-47e0-8d28-16de0ab80a0b&tenantId=618bab0f-20a4-4de3-a10c-e20cee96bb35>`__
-* Duración de la actividad: 
-   
-   * 50 minutos de discusión
-   * 50 minutos para solucionar dudas finales de la Unidad.
-
-* Forma de trabajo: colaborativo con solución de dudas en tiempo real.
