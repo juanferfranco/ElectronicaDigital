@@ -1,31 +1,59 @@
 Semana 5
 ===========
 
-Objetivos
-----------
-1. Implementar algoritmos básicos en lenguaje ensamblador que combinen acceso a la memoria RAM
-   con cambios de posición en la memoria de programa.
-2. Comprender el concepto de entrada salida mapeada a memoria
-3. Realizar un programa en lenguaje ensamblador que implemente un algoritmo básico combinado
-   con acceso a dispositivos de entrada-salida.
+Unidad 3: circuitos secuenciales
+------------------------------------
 
+En esta unidad vamos a introducir los circuitos lógicos
+secuenciales. Estos circuitos nos permitirán construir
+registros y memorias. 
 
-Sesión 1
----------
-Vamos a introducir el proyecto 4.
+Propósitos de aprendizaje
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+#. Desarrollar habilidades para la detección de errores.
+#. Construir circuitos secuenciales para almacenar información
 
-Sesión 2
----------
-En el primer bloque de la sesiones vamos a realizar la retroalimentación del parcial. En
-la segunda se revisarán las instrucciones de salto y se comenzará el proyecto 4. Queda
-como tarea terminar el proyecto 4 en casa.
+Código de honor
+^^^^^^^^^^^^^^^^^
+Al realizar el proyecto de esta semana se espera que hagas lo siguiente:
 
+* Colabora con tus compañeros cuando así se indique.
+* Trabaja de manera individual cuando la actividad así te lo proponga.
+* NO DEBES utilizar sitios en Internet con soluciones o ideas para atacar el proyecto.
+* NO DEBES hacer uso de foros para buscar soluciones al proyecto.
+* ¿Entonces qué hacer si no me funciona algo? Te propongo que experimentes, crea hipótesis,
+  experimenta de nuevo, observa y concluye.
+* NO OLVIDES, este curso se trata de pensar y experimentar NO de BUSCAR soluciones
+  en Internet.
 
-Material
----------
-Este material corresponde al proyecto 4: Lenguaje de máquina.
+Actividad 1
+*************
+* Fecha: julio 31 a agosto 5 de 2020
+* Descripción: trabajo autónomo
+* Recursos: 
 
-* La presentación de hoy: `Presentación con Ejercicios y tareas <https://drive.google.com/open?id=1z0bQMiwobVZOGovkFABp4iw7QWXQpb6fgvEKmkm0bak>`__.
-* `Presentación <https://docs.wixstatic.com/ugd/44046b_4a28a2456639425896f6cc1c7a51da88.pdf>`__.
-* `Proyecto <https://www.nand2tetris.org/project04>`__
-* `Capítulo del libro <https://docs.wixstatic.com/ugd/44046b_7ef1c00a714c46768f08c459a6cab45a.pdf>`__
+    #. Lee el `capítulo 3 del libro guía <https://b1391bd6-da3d-477d-8c01-38cdf774495a.filesusr.com/ugd/44046b_862828b3a3464a809cda6f44d9ad2ec9.pdf>`__.
+    #. También tienes disponible esta `presentación <https://b1391bd6-da3d-477d-8c01-38cdf774495a.filesusr.com/ugd/56440f_e458602dcb0c4af9aaeb7fdaa34bb2b4.pdf>`__
+    para que complementes.
+    #. Lee la definición del proyecto y la información que encuentras `aquí <https://www.nand2tetris.org/project03>`__
+    #. Comienza a trabajar en el proyecto. Avanza todo lo que puedas.
+
+* Duración de la actividad: 3 horas de trabajo autónomo
+* Forma de trabajo: individual
+
+Actividad 2
+*************
+* Fecha: agosto 5 de 2020 - 8 a.m.
+* Descripción: encuentro sincrónico para trabajar y resolver dudas
+  en tiempo real.
+* Recursos: ingresa al grupo de Teams.
+* Duración de la actividad: 1 hora 40 minutos 
+* Forma de trabajo: colaborativo con solución de dudas en tiempo real.
+
+Actividad 3
+*************
+* Fecha: agosto 5 a agosto 7 de 2020.
+* Descripción: trabajo autónomo.
+* Recursos: continua trabajando en el proyecto. 
+* Duración de la actividad: 3 horas de trabajo autónomo
+* Forma de trabajo: individual.

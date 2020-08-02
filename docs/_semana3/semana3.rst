@@ -1,8 +1,8 @@
 Semana 3
 ===========
 
-Unidad 1: circuitos combinacionales
-------------------------------------
+Unidad 1: compuertas lógicas
+------------------------------
 
 Actividades
 ^^^^^^^^^^^^
