@@ -45,8 +45,7 @@ Actividad 5
   indique el instante de tiempo en el cual se pueden encontrar cada una de las secciones solicitadas en el video.
 * Comprime la carpeta principal en formato .ZIP, ojo, solo .ZIP no uses otros
   formatos por favor.
-* Entrega el archivo .ZIP `aquí <>`__.
-* La fecha límite para entregar el trabajo es antes de la sesión de julio 31 de 2020.
+* Entrega el archivo .ZIP `aquí <https://auladigital.upb.edu.co/mod/assign/view.php?id=616114>`__
 
 ¿Qué deberá tener el video de sustentación?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -70,7 +69,7 @@ Actividad 6
 ************
 Esta es la última activada de la unidad 3.
 
-* Fecha: julio 31 de 2020 - 8 a.m.
+* Fecha: agosto 14 2020 - 8 a.m.
 * Descripción: encuentro sincrónico para compartir y discutir los
   resultados del reto de la unidad 3 e introducir la unidad 4
 * Recursos: ingresa al grupo de Teams
