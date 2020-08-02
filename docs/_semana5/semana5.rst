@@ -57,3 +57,12 @@ Actividad 3
 * Recursos: continua trabajando en el proyecto. 
 * Duración de la actividad: 3 horas de trabajo autónomo
 * Forma de trabajo: individual.
+
+Actividad 4
+*************
+* Fecha: agosto 7 de 2020 - 8 a.m.
+* Descripción: encuentro sincrónico para trabajar y resolver dudas
+  en tiempo real.
+* Recursos: ingresa al grupo de Teams.
+* Duración de la actividad: 1 hora 40 minutos 
+* Forma de trabajo: colaborativo con solución de dudas en tiempo real.

@@ -68,7 +68,7 @@ Actividad 5
 
 Actividad 6
 ************
-Esta es la última activada de la unidad 2.
+Esta es la última actividad de la unidad 2.
 
 * Fecha: julio 31 de 2020 - 8 a.m.
 * Descripción: encuentro sincrónico para compartir y discutir los

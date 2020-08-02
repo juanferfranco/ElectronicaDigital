@@ -4,7 +4,7 @@ Semana 6
 Unidad 3: circuitos secuenciales
 ----------------------------------
 
-Actividad 4
+Actividad 5
 ************
 * Fecha: agosto 12 de 2020 - 8 a.m.
 * Descripción: asiste al encuentro sincrónico para resolver dudas en tiempo real con el docente.
@@ -16,7 +16,7 @@ Actividad 4
 * Duración de la actividad: 1:40 minutos sincrónicos.
 * Forma de trabajo: grupal
 
-Actividad 5
+Actividad 6
 ************
 * Fecha: agosto 12 a agosto 14 de 2020.
 * Descripción: terminación del proyecto y sustentación
@@ -65,9 +65,9 @@ Actividad 5
 * Tus explicaciones deben ser claras, precisas y completas. No olvides planear 
   bien tu video de sustentación.
 
-Actividad 6
+Actividad 7
 ************
-Esta es la última activada de la unidad 3.
+Esta es la última actividad de la unidad 3.
 
 * Fecha: agosto 14 2020 - 8 a.m.
 * Descripción: encuentro sincrónico para compartir y discutir los

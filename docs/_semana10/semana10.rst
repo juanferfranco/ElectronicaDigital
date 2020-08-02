@@ -1,200 +1,76 @@
 Semana 10
 ===========
 
-Esta semana continuaremos con la exploración del API de arduino y
-algunas características de C/C++.
+Unidad 5: Arquitectura del computador
+--------------------------------------
 
+Actividad 5
+************
+* Fecha: septiembre 9 de 2020 - 8 a.m.
+* Descripción: asiste al encuentro sincrónico para resolver dudas en tiempo real con el docente.
+* Recursos: 
 
-Ejercicio 1
-------------
-Hasta ahora hemos explorado varias maneras de interactuar con
-dispositivos externos por medio de puertos de entrada salida usando:
+    #. Ingresar al grupo de Teams
+    #. Continua trabajando en el `proyecto <https://www.nand2tetris.org/project05>`__
 
-* Salidas digitales
-* Entradas digitales
-* Entradas analógicas
+* Duración de la actividad: 1:40 minutos sincrónicos.
+* Forma de trabajo: grupal
 
-Ahora en este ejercicio vamos a explorar las salida analógicas. Dichas
-salidas, en principio son digitales pero moduladas en ancho de pulso
-o de PWM. Para ello usamos esta función:
+Actividad 6
+************
+* Fecha: septiembre 9 a septiembre 11 de 2020.
+* Descripción: terminación del proyecto y sustentación
+* Recursos: 
 
-.. code-block:: cpp
-   :lineno-start: 1
+    #. Termina el proyecto.
+    #. Realiza el video de sustentación para lo cual te recomiendo los siguientes recursos:
 
-    analogWrite(pin, value)
+        #. Software para capturar `OBS Studio <https://obsproject.com/>`__
+        #. Observa `este <https://www.youtube.com/watch?time_continue=3&v=1tuJjI7dhw0>`__
+           tutorial para el manejo de OBS Studio.
+           
+* Duración de la actividad: 5 horas.
+* Forma de trabajo: individual.
 
-Que produce una señal cuadra en pin con un duty cycle dado por value,
-como se muestra en la figura de `este <https://www.arduino.cc/en/tutorial/PWM>`__
-sitio. 
+¿Qué debes entregar?
+^^^^^^^^^^^^^^^^^^^^^
+* Crea una carpeta que llamarás reto2.
+* Guarda todos los archivos del project2 en esa carpeta.
+* Realiza la representación circuital para cada circuito. Marca claramente en el circuito: el nombre de cada
+  chip, el nombre de los puertos y el nombre de los cables. Todos estos nombres deben coincidir con los nombres
+  en el archivo de implementación de cada circuito.
+* Guarda en la carpeta una copia de la `rúbrica <https://docs.google.com/spreadsheets/d/12oSR3njItTalzOYAGyh6QTV-j5piEXIrXU1ncZEFcHY/edit?usp=sharing>`__
+  con tu autoevaluación diligenciada
+* En la carpeta guarda un archivo .pdf con el enlace al video de sustentación y una tabla de contenidos que 
+  indique el instante de tiempo en el cual se pueden encontrar cada una de las secciones solicitadas en el video.
+* Comprime la carpeta principal en formato .ZIP, ojo, solo .ZIP no uses otros
+  formatos por favor.
+* Entrega el archivo .ZIP `aquí <https://auladigital.upb.edu.co/mod/assign/view.php?id=616122>`__
 
-Analice el siguiente ejemplo:
+¿Qué deberá tener el video de sustentación?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. code-block:: cpp
-   :lineno-start: 1
+* Máximo 20 minutos: debes planear el video muy bien tal como aprendiste en segundo semestre.
+* Cuida la calidad del audio y del video.
+* Sección 1: introducción. Di tu nombre y si realizaste el RETO
+  completo. Si no terminaste indica claramente qué te faltó y por qué. NO OLVIDES
+  diligenciar la rúbrica con tu autoevaluación.
+* Sección 2: modelado. Explica detalladamente cómo resolviste el problema, qué utilizaste,
+  que alternativas de solución viste, justifica las razones para usar
+  una alternativa sobre otras. Usa una aplicación de whiteboard para explicar el funcionamiento del modelo circuital.
+* Sección 3: implementación. Muestra que tu programa carga bien y sin errores
+  o advertencias problemáticas. Explica el código fuente tu programa.
+* Sección 4: pruebas. Muestra claramente que tu programa pasa todos los vectores de prueba
+  definidos.
+* Tus explicaciones deben ser claras, precisas y completas. No olvides planear 
+  bien tu video de sustentación.
 
-    #define ledPin 3
-    #define analogPin 0
+Actividad 7
+************
+Esta es la última actividad de la unidad 5.
 
-    uint16_t counter = 0;
-    int8_t direction = 1;
-
-    void setup() {
-        Serial.begin(115200);
-        pinMode(ledPin, OUTPUT);
-    }
-
-
-    void loop() {
-        analogWrite(ledPin, counter); 
-        counter = (counter + direction);
-        if(counter == 0) direction = 1;
-        if(counter == 129) direction = -1;
-
-        Serial.println(counter);
-        delay(20);
-
-    }
-
-Ejercicio 2: RETO 1
---------------------
-Monte un circuito (en tinkercad) y realice un programa que permita controlar
-el brillo de un LED mediante un potenciómetro.
-
-Tenga que presente que el valor del potenciómetro va de 0 hasta 5V y este
-se convierte a un valor entre 0 y 1023, es decir, la conversión se realiza
-en 10 bits.
-
-COnsidere que el valor del PWM puede ir de 0 a 255. Para garantizar que
-value estará en ese rango podemos emplear una de las funciones matemáticas
-que ofrece el API de arduino:
-
-.. code-block:: cpp
-   :lineno-start: 1
-
-    map(value, fromLow, fromHigh, toLow, toHigh)
-
-En este caso map toma fromLow y lo convierte a toLow y
-fromHigh y lo convierte a toHigh. Los valores intermedios son mapeados de
-manera lineal.
-
-NOTA: para el ESP32 se debe usar una función diferente para el PWM. Ver el
-`este <https://techexplorations.com/guides/esp32/begin/pwm/>`__ enlace.
-
-Ejercicio 3:
---------------
-Analice el siguiente código:
-
-.. code-block:: cpp
-   :lineno-start: 1
-
-    void setup() {
-       Serial.begin(115200);
-
-    }
-
-
-    void loop() {
-
-      uint8_t counter = 20;
-
-      counter++;
-
-      Serial.println(counter);
-
-      delay(100);
-
-    }
-
-Compare el código anterior con este:
-
-.. code-block:: cpp
-   :lineno-start: 1
-
-    void setup() {
-       Serial.begin(115200);
-
-    }
-
-
-    void loop() {
-
-      static uint8_t counter = 20;
-
-      counter++;
-
-      Serial.println(counter);
-
-      delay(100);
-
-    }
-
-Ahora compare con este otro código:
-
-.. code-block:: cpp
-   :lineno-start: 1
-
-	uint8_t counter = 5;
-
-    void setup() {
-       Serial.begin(115200);
-
-    }
-
-
-    void incCounter() {
-      static uint8_t counter = 10;
-      counter++;
-      Serial.print("Counter in incCounter: ");
-      Serial.println(counter);
-
-    }
-
-    void loop() {
-      static uint8_t counter = 20;
-      counter++;
-	    Serial.print("Counter in loop: ");
-      Serial.println(counter);
-      incCounter();
-      Serial.print("Counter outside loop: ");
-      Serial.println(::counter);
-      ::counter++;
-      delay(500);
-    }
-
-¿Qué podemos concluir?
-
-
-Ejercicio 4
-------------
-Analizar el siguiente ejemplo:
-
-.. code-block:: cpp
-   :lineno-start: 1
-
-    const uint8_t ledPin =  3;
-    uint8_t ledState = LOW;
-    uint32_t previousMillis = 0;
-    const uint32_t interval = 1000;
-
-    void setup() {
-      // set the digital pin as output:
-      pinMode(ledPin, OUTPUT);
-    }
-    
-    void loop() {
-      uint32_t currentMillis = millis();
-    
-      if (currentMillis - previousMillis >= interval) {
-        previousMillis = currentMillis;
-        if (ledState == LOW) {
-          ledState = HIGH;
-        } else {
-          ledState = LOW;
-        }´
-    }
-
-Ejercicio 5: RETO 2
---------------------
-Realice un programa que encienda y apague tres LEDs a
-1 Hz, 5 Hz y 7 Hz respectivamente utilizando la técnica vista en
-el ejercicio 4.
+* Fecha: septiembre 11: encuentro sincrónico para compartir y discutir los
+  resultados del reto de la unidad 5 e introducir la unidad 6
+* Recursos: ingresa al grupo de Teams
+* Duración de la actividad: 1 hora 40 minutos de discusión
+* Forma de trabajo: colaborativo con solución de dudas en tiempo real.
