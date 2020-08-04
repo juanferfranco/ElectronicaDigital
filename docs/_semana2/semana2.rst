@@ -49,7 +49,7 @@ Actividad 5
   indique el instante de tiempo en el cual se pueden encontrar cada una de las secciones solicitadas en el video.
 * Comprime la carpeta principal en formato .ZIP, ojo, solo .ZIP no uses otros
   formatos por favor.
-* Entrega el archivo .ZIP `aquí <https://upbeduco-my.sharepoint.com/:f:/g/personal/juanf_franco_upb_edu_co/EhGDDqumqV1MtC1eti26yZMBNTCi8hDW0pWliBJVoBGo-g>`__.
+* Entrega el archivo .ZIP `aquí <https://auladigital.upb.edu.co/mod/assign/view.php?id=616102>`__.
 * La fecha límite para entregar el trabajo es antes de la sesión de julio 22 de 2020.
 
 ¿Qué deberá tener el video de sustentación?
