@@ -1,307 +1,176 @@
 Semana 12
 ===========
 
-Esta semanas vamos a estudiar más en detalle cómo funciona el puerto
-serial de un controlador y cómo se usa este desde el framework de arduino.
-Vamos a introducir también la técnica de programación
-con máquinas de estados.
+Unidad 6: Introducción a los sistemas embebidos
+------------------------------------------------
 
-Sesión  1
-----------
-En esta sesión comenzaremos revisando cómo funciona el puerto serie.
-
-Ejercicio 1
+Actividades
 ^^^^^^^^^^^^^
-En este ejercicio vamos a introducir cómo funcionan las comunicaciones
-seriales. Para ello vamos a tomar material de
-`este <https://learn.sparkfun.com/tutorials/serial-communication/all>`__
-sitio.
 
-Ejercicio 2
-^^^^^^^^^^^^^^^^^^
-¿Dónde encuentro el API de arduino para el manejo del serial?
+Actividad 1
+*************
+* Fecha: septiembre 23 de 2020 - 8 a.m.
+* Descripción: encuentro sincrónico para trabajar de manera
+  grupal en los ejercicios.
+* Recursos: ingresa al grupo de Teams.
+* Duración de la actividad: 1 hora 40 minutos 
+* Forma de trabajo: colaborativo con solución de dudas en tiempo real.
 
-`Aquí <https://www.arduino.cc/reference/en/language/functions/communication/serial/>`__
+Actividad 2
+*************
+* Fecha: septiembre 23 a septiembre 25 de 2020.
+* Descripción: continuar con los ejercicios
+* Recursos: ejercicios propuestos. 
+* Duración de la actividad: 5 horas de trabajo autónomo
+* Forma de trabajo: individual.
 
-Ejercicio 3
-^^^^^^^^^^^^^^^^^^
-Vamos a responder algunas preguntas (hay que tomar nota de las soluciones)
+Ejercicio 1: flujo de trabajo 
+##################################
+El flujo de trabajo para realizar aplicaciones con arduino será:
 
-* ¿Qué pasa cuando hago un Serial.available()?
-* ¿Qué pasa cuando hago un Serial.read()?
-* ¿Qué pasa cuando hago un Serial.read() y no hay nada en el buffer de
-  recepción?
-* Un patrón común al trabajar con el puerto serial es este:
+* Crear un archivo nuevo. Este archivo inicia con dos funciones: ``setup()`` y ``loop()``.
+* La función setup se ejecuta solo una vez al momentos de energizar el ESP32 o cuando se presiona el botón de reset.
+* La función loop será llamada constantemente por el framework de arduino.
+* Una vez escrita la parte de la aplicación que se desea probar, se debe compilar. El proceso de compilación verifica que 
+  el programa no tenga errores sintácticos y genera el código de máquina que posteriormente se cargará en la memoria de
+  programa del ESP32. Para realizar la verificación y compilación se selecciona el primer ícono en la parte superior izquierda.
+* Una vez compilada la aplicación se procede a grabar la memoria del microcontrolador. Esto se realiza con el segundo ícono
+  de la parte superior izquierda.
+* Finalmente se selecciona el ícono del monitor serial en la esquina superior derecha. Este ícono permite abrir la terminal
+  serial por medio la cual se podrán visualizar los mensajes que el ESP32 le enviará al computador utilizando el 
+  objeto ``Serial``.
 
-.. code-block:: cpp
-   :lineno-start: 1  
-
-    if(Serial.available() > 0){
-        int dataRx = Serial.read() 
-    }
-
-* ¿Cuánto datos lee Serial.read()?
-* ¿Y si quiero leer más de un dato? No olvide que no se pueden leer más datos
-  de los disponibles en el buffer de recepción, claramente porque no hay
-  más datos que los que tenga allí.
-
-Ejercicio 4
-^^^^^^^^^^^^^^^^^^
-Vamos a leer 3 datos del puerto serial:
-
-.. code-block:: cpp
-   :lineno-start: 1  
-
-    if(Serial.available() >= 3){
-        int dataRx1 = Serial.read()
-        int dataRx2 = Serial.read() 
-        int dataRx3 = Serial.read() 
-    }
-
-Ejercicio 5
-^^^^^^^^^^^^^^^^^^
-¿Qué escenarios podría tener en este caso?
+Vamos a probar todos los pasos anteriores con este programa:
 
 .. code-block:: cpp
-   :lineno-start: 1  
+   :lineno-start: 1
 
-    if(Serial.available() >= 2){
-        int dataRx1 = Serial.read()
-        int dataRx2 = Serial.read() 
-        int dataRx3 = Serial.read() 
+    void setup() {
+      Serial.begin(115200);
     }
 
-Explique detalladamente, recurriendo al material del
-ejercicio 1, cómo se podría explicar cada escenario.
+    void loop() {
+      Serial.print("Hello from ESP32\n");  
+      delay(1000);  
+    }
 
-Ejercicio 6: RETO
-^^^^^^^^^^^^^^^^^^
-Piense cómo podría hacer lo siguiente:
+Ejercicio 2: API de arduino 
+###############################
+En `este enlace <https://www.arduino.cc/reference/en/>`__ se pueden consultar muchas de las funciones disponibles para
+realizar programas usando el API de Arduino.
+
+El siguiente programa permite encender y apagar un LED conectado a un puerto de entrada salida:
 
 .. code-block:: cpp
-   :lineno-start: 1  
-
-    void taskSerial(){
-        // Tener encapsulado en la tarea el buffer
-    }
-
-    void loop(){
-        taskSerial();
-    }
-
-
-* Almacenar los datos en su propio buffer de recepción
-  (el buffer será un arreglo).
-* El buffer debe estar encapsulado en la tarea
-* Los datos almacenados en el buffer no se pueden perder
-  entre llamados a taskSerial() en la función loop.  
-* ¿Cómo hacer para saber en cualquier parte de taskSerial()
-  cuántos datos tengo guardados en el buffer de recepción?
-
-Ejercicio 7
-^^^^^^^^^^^^^^^^^^
-Vamos a detenernos un momento en el software del lado del
-computador: el terminal. Veamos dos de ellas, la terminal
-de arduino y `esta <https://sourceforge.net/projects/scriptcommunicator/>`__
-otra (scriptcommunicator)
-
-* ¿Qué es un programa terminal? 
-* ¿Para qué sirve?
-
-Ejercicio 8
-^^^^^^^^^^^^^^^^^^
-Considere el siguiente programa
-
-.. code-block:: cpp
-   :lineno-start: 1  
+   :lineno-start: 1
 
     void setup()
     {
-      Serial.begin(9600);
+      pinMode(2, OUTPUT);
     }
-
+    
     void loop()
     {
-
-      if(Serial.available() > 0){
-
-        Serial.read();
-
-        int8_t var = -1;
-
-        Serial.println("Inicio de la prueba");
-        Serial.write(var);
-        Serial.print("\n");
-        Serial.print(var);
-        Serial.print('\n');
-        Serial.println("Fin de la prueba"); 
-      }
+      digitalWrite(2, HIGH);
+      delay(1000); // Wait for 1000 millisecond(s)
+      digitalWrite(2, LOW);
+      delay(1000); // Wait for 1000 millisecond(s)
     }
 
-* Observe el resultado de la prueba.
-* ¿Qué observa en la terminal de arduino para cada caso?
+El siguiente programa permite leer un puerto digital y encender y apagar un LED:
+
 
 .. code-block:: cpp
-   :lineno-start: 1  
-
-    Serial.write(var);
-    Serial.print(var);
-
-
-* ¿Qué observa en scriptcommunicator para cada caso?
-*  En la siguiente parte del código:
-
-.. code-block:: cpp
-   :lineno-start: 1  
-
-    if(Serial.available() > 0){
-
-        Serial.read();
-
-Comente la línea Serial.read()
-
-.. code-block:: cpp
-   :lineno-start: 1  
-
-    if(Serial.available() > 0){
-
-        //Serial.read();
-
-* ¿Qué ocurre? ¿Por qué ocurre esto?
-
-En la siguiente parte del código:
-
-.. code-block:: cpp
-   :lineno-start: 1  
-
-    Serial.println("Inicio de la prueba");
-    Serial.write(var);
-    Serial.print("\n");
-    Serial.print(var);
-    Serial.print('\n');
-    Serial.println("Fin de la prueba"); 
-
-¿Cuál es la diferencia entre estas dos líneas de código?
-
-.. code-block:: cpp
-   :lineno-start: 1  
-
-   Serial.print("\n");
-
-   Serial.print('\n');
-
-Ejercicio 9: RETO
-^^^^^^^^^^^^^^^^^^
-Considere el siguiente código para analizar en scriptcommunicator:
-
-.. code-block:: cpp
-   :lineno-start: 1  
+   :lineno-start: 1
 
     void setup()
     {
-      Serial.begin(9600);
+      pinMode(2, OUTPUT);
+      pinMode(3,INPUT);
+      
     }
-
+    
     void loop()
     {
-
-      if(Serial.available() > 0){
-        Serial.read();
-        int8_t var = 255;
-        int8_t var2 = 0xFF;
-
-        Serial.write(var);
-        Serial.print(var);
-        Serial.write(var2);
-        Serial.print(var2);
-
+      if(digitalRead(3) == HIGH){
+        digitalWrite(2, HIGH);  
+      }
+      else{
+        digitalWrite(2, LOW);
       }
     }
 
-Explique con convicción qué está ocurriendo en cada caso.
+Ejercicio 3: RETO 1
+###############################
+Realice un programa que lea el estado de dos switches y encienda solo
+uno de 4 LEDs (un LED para cada estado)
 
-Ejercicio 10: RETO
-^^^^^^^^^^^^^^^^^^^
-Este reto es para las horas de trabajo autónomas del curso:
+Ejercicio 4: puerto serial
+###############################
+.. code-block:: cpp
+   :lineno-start: 1
 
-* Repita lentamente los ejercicios de esta sesión: analice, analice,
-  analice.
-* Experimente con los ejercicios de esta sesión y de nuevo: analice;
-  haga cambios; hágase preguntas antes de ejecutar los cambios; si no
-  compila busque por qué, si no encuentra la respuesta documente y
-  consulte a su profe; antes de ejecutar un cambio piense qué pasará y
-  luego ejecute, compare, analice.
-* Haga lo anterior con cada ejercicio hasta que se asegure de comprender.
-  NO OLVIDE: antes de ejecutar es importante predecir qué pasará y luego
-  contrastar.
+    void setup()
+    {
+      pinMode(2, OUTPUT);
+      pinMode(3,INPUT);
+      Serial.begin(115200);
+      
+    }
+    
+    void loop()
+    {
+      if(digitalRead(3) == HIGH){
+        digitalWrite(2, HIGH);  
+        Serial.println("LED ON");
+      }
+      else{
+        digitalWrite(2, LOW);
+        Serial.println("LED OFF");
+      }
+    }
 
-Sesión  2
-----------
-En este punto ya tenemos todos los elementos para abordar la construcción
-de una aplicación utilizando máquinas de estado.
+Ejercicio 5: RETO 2
+###############################
+Modifique el código del reto 1 para indicar por el puerto serial
+cuál de los 4 LEDs está encendido.
 
-Ejercicio 1: enunciado del problema
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-En un proyecto interactivo se requiere conectar un controlador a una
-aplicación interactiva (AI). 
-
-Considere:
-
-* Para simular la AI utilice scriptcommunicator. Esto se requiere porque debemos 
-  transmitir bytes NO caracteres ASCII. Ojo!
-* La AI siempre iniciará la comunicación.
-* La secuencia de bytes más grande será de 20 bytes.
-
-PASOS para realizar la comunicación:
-
-1. La AI inicia una transacción enviando el byte 3E.
-2. El controlador deberá responder con el byte 4A.
-3. La AI no podrá continuar hasta no recibir la respuesta del controlador.
-   Una vez el controlador responda, la AI enviará al controlador
-   un paquete de bytes así:
+Ejercicio 6: ADC
+###############################
+El siguiente programa lee una señal análoga y la convierte a digital.
 
 .. code-block:: cpp
    :lineno-start: 1
 
-    Byte 1 : longitud
-    Byte 2 : Dirección
-    Byte 3 : Comando
-    Byte 4 a n : Datos
-    Byte n+1: verificacion
+    void setup()
+    {
+      pinMode(2, OUTPUT);
+      pinMode(3,INPUT);
+      Serial.begin(115200);
+    }
+    
+    void loop()
+    {
+        
+        Serial.println(analogRead(A0));
+        delay(1000);
+    }
 
-* El byte de longitud, es el primer byte de la trama e indica cuántos bytes la AI
-  enviará a continuación, es decirm de byte 2 hasta el byte n + 1.
-* La AI calculará el byte de verificación así: Byte1 XOR Byte2 XOR … XOR ByteN.
-* En C la operación XOR se realiza utilizando el operador 
+Actividad 3
+*************
+* Fecha: septiembre 25 de 2020 - 8 a.m.
+* Descripción: solución de dudas de los ejercicios y trabajo en el reto.
+* Recursos: ingresa al grupo de Teams.
+* Duración de la actividad: 1 hora 40 minutos 
+* Forma de trabajo: colaborativo con solución de dudas en tiempo real.
 
-.. code-block:: cpp
-   :lineno-start: 1
-
-   ^
-
-4. El controlador esperará hasta un 1 segundo a que la trama llegue. Si esta condición
-  NO se cumple el controlador enviará a la AI el byte 3D. La AI deberá inciar de
-  nuevo la secuencia de comunicación desde el paso 1. 
-  
-  Una vez el controlador tenga la trama completa calculará el byte de cerificación
-  de la misma manera que la AI lo hizo. El resultado debe ser igual al bytes de verificación
-  recibido. Sí el byte de verificación calculado no corresponde al byte de verificación
-  recibido, el controlador enviará el byte 3F y la AI deberá reenviar la trama. 
-  Sí hay coincidencia el controlador deberá responder a la AI con el byte 4A y luego enviar
-  la siguiente secuencia de bytes:
-
-.. code-block:: cpp
-   :lineno-start: 1
-
-    Byte 1 : longitud
-    Byte 2 : Byte4 recibido
-    Byte m : Byten recibido
-    Byte m+1 : verificación
-
-5. Sí la AI recibe correctamente el paquete deberá responder con el byte 4A. 
-   El controlador quedará preparado para volver al paso 1, es decir, esperar por una nueva
-   trama. Sí ha pasado 1 segundo y el controlador no recibe el 4A, entonces deberá
-   retransmitir el paquete a la AI. Este comportamiento solo se detendrá hasta que la
-   AI envie el 4A.
-
+Ejercicio 7: RETO 3
+###############################
+Lea el valor de una entrada analógica. Si la entrada es menor
+a 340 enciende un led verde y envía por el puerto serial solo una
+vez LED_VERDE. Si es mayor a 340 pero menor a 700 enciende solo 
+el LED amarillo y envía por el puerto serial solo una vez LED_AMARILLO.
+Finalmente, si es mayor a 700 enciende solo el LED rojo y envía por
+el puerto serial solo una vez LED_ROJO. Tenga en cuenta que al entrar
+a cada rango se debe enviar solo una vez el mensaje por el puerto
+serial.
