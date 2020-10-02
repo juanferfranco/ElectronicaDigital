@@ -37,9 +37,10 @@ o de PWM. Para ello usamos esta función:
 
     analogWrite(pin, value)
 
-``analogWrite`` produce una señal cuadra con un duty cycle dado por ``value`,
+``analogWrite`` produce una señal cuadra con un duty cycle dado por ``value``,
 como se muestra en la figura de `este <https://www.arduino.cc/en/tutorial/PWM>`__
 sitio. 
+
 
 Analice el siguiente ejemplo:
 
@@ -70,7 +71,7 @@ Analice el siguiente ejemplo:
     }
 
 Ejercicio 2: RETO 1
---------------------
+########################
 Monta un circuito (en tinkercad) y realiza un programa que permita controlar
 el brillo de un LED mediante un potenciómetro.
 
