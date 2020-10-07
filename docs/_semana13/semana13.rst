@@ -699,16 +699,16 @@ usando únicamente una tarea:
 
     class LED{
 
-    private:
-      uint32_t previousMillis;
-      const uint32_t interval;
-      const uint8_t ledPin;
-      uint8_t ledState = LOW;
+      private:
+        uint32_t previousMillis;
+        const uint32_t interval;
+        const uint8_t ledPin;
+        uint8_t ledState = LOW;
 
-    public:
-      LED(uint8_t _ledpin, uint32_t _interval): ledPin(_ledpin), interval(_interval) {
-       pinMode(_ledpin, OUTPUT);
-       previousMillis = 0;
+      public:
+        LED(uint8_t _ledpin, uint32_t _interval): ledPin(_ledpin), interval(_interval) {
+        pinMode(_ledpin, OUTPUT);
+        previousMillis = 0;
       }
 
       void toggleLED(){
@@ -723,7 +723,6 @@ usando únicamente una tarea:
          digitalWrite(ledPin, ledState);
        }
       }
-
     };
 
     void setup() {
