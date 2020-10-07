@@ -1,19 +1,33 @@
 Semana 16
 ===========
-Esta semana vamos a cerrar el curso así:
 
-Sesión 1
----------
-Trabajo autónomo en los retos.
+Unidad 8: máquinas de estado
+----------------------------------
 
-Sesión 2
----------
-Presentación individual de los retos así:
+Actividades
+^^^^^^^^^^^^^
 
-6:00 a.m. a 6:19 a.m. Jerónimo
+Actividad 1
+*************
+* Fecha:octubre 21 de 2020 - 8 a.m.
+* Descripción: encuentro sincrónico para trabajar de manera
+  grupal en los ejercicios.
+* Recursos: ingresa al grupo de Teams.
+* Duración de la actividad: 1 hora 40 minutos 
+* Forma de trabajo: colaborativo con solución de dudas en tiempo real.
 
-6:20 a.m. a 6:39 a.m. Anderson
+Actividad 2
+*************
+* Fecha: octubre 21 a octubre 23 de 2020.
+* Descripción: continuar con los ejercicios
+* Recursos: ejercicios propuestos. 
+* Duración de la actividad: 5 horas de trabajo autónomo
+* Forma de trabajo: individual.
 
-6:40 a.m. a 6:59 a.m. Kimberly
-
-7:00 a.m. a 7:19 a.m. Luis
+Actividad 3
+*************
+* Fecha: octubre 23 de 2020 - 8 a.m.
+* Descripción: evaluación final
+* Recursos: ingresa al grupo de Teams.
+* Duración de la actividad: 1 hora 40 minutos 
+* Forma de trabajo: individual.

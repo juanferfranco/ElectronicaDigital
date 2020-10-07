@@ -1,258 +1,104 @@
 Semana 15
 ===========
 
-Esta semana vamos a trabajar en otro protocolo de transporte que nos permite
-conectar sensores y actuadores en red inalámbrica. Se trata de UDP (la semana
-pasada trabajamos TCP).
+Unidad 8: máquinas de estado
+----------------------------------
+En esta última unidad del curso vamos a abordar
+una técnica de construcción de software para el microcontrolador
+que permitirá hacer un uso eficiente de la CPU y adicionalmente
+poder realizar varias tareas de manera concurrente.
 
-Sesión 1
------------
-La semana anterior utilizamos TCP/IP y el modelo cliente servidor para 
-integrar sensores y actuadores utilizando WiFi. En ests sesión vamos a utilizar el protocolo 
-UDP.
+Actividades
+^^^^^^^^^^^^^
 
-Objetivo de la sesión
-^^^^^^^^^^^^^^^^^^^^^^^
+Actividad 1
+*************
+* Fecha:octubre 14 de 2020 - 8 a.m.
+* Descripción: encuentro sincrónico para trabajar de manera
+  grupal en los ejercicios.
+* Recursos: ingresa al grupo de Teams.
+* Duración de la actividad: 1 hora 40 minutos 
+* Forma de trabajo: colaborativo con solución de dudas en tiempo real.
 
-Integrar sensores y actuadores con dispositivos de cómputo utilizando WiFi y el protocolo UDP.
 
-Ejercicio: analizar el código
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Ejercicio 1: enunciado del problema
+#####################################
 
-Para explorar `UDP <https://www.arduino.cc/en/Reference/WiFi>`__ vamos a realizar un proyecto 
-simple que ilustra el uso del protocolo. Se trata de un conjunto de actuadores distribuidos 
-en el espacio y un coordinar central, un PC. Cada actuador enciende y 
-apaga un puerto de entrada salida según lo indique el comando, que se recibe por UDP, y que será 
-enviado por el coordinador central. El coordinador cuenta con un dispositivo, que llamaremos 
-bridge, quien recibirá por serial los comandos y los reenviará por UDP a los actuadores 
-distribuidos.
+En un proyecto interactivo se requiere conectar un controlador a una
+aplicación interactiva (AI). 
 
-El protocolo de comunicación serial es simple. Se trata de un protocolo ascii compuesto por 
-tres caracteres. El primer carácter indica a cual actuador se enviará el comando. 
-El segundo carácter el estado deseado para la salida ('1' on, '0' off). Por último, 
-se envía un carácter de sincronización ('*').
+Considere:
 
-El código del bridge es el siguiente:
+* Para simular la AI utilice scriptcommunicator. Esto se requiere porque debemos 
+  transmitir bytes NO caracteres ASCII. Ojo!
+* La AI siempre iniciará la comunicación.
+* La secuencia de bytes más grande será de 20 bytes.
 
-.. code-block:: cpp
-   :lineno-start: 1
-   
-   #include <WiFi.h>
-   #include <WiFiUdp.h>
-   
-   const char* ssid = "?";
-   const char* password = "?";
-   WiFiUDP udpDevice;
-   uint16_t localUdpPort = ?;
-   uint16_t UDPPort = ?;
-   #define MAX_LEDSERVERS 3
-   const char* hosts[MAX_LEDSERVERS] = {"?.?.?.?", "?.?.?.?", "?.?.?.?"};
-   #define SERIALMESSAGESIZE 3
-   uint32_t previousMillis = 0;
-   #define ALIVE 1000
-   #define D0 5
-   
-   void setup() {
-     pinMode(D0, OUTPUT);     // Initialize the LED_BUILTIN pin as an output
-     digitalWrite(D0, HIGH);
-     Serial.begin(115200);
-     Serial.println();
-     Serial.println();
-     Serial.print("Connecting to ");
-     Serial.println(ssid);
-   
-     WiFi.mode(WIFI_STA);
-     WiFi.begin(ssid, password);
-   
-     while (WiFi.status() != WL_CONNECTED) {
-       delay(500);
-       Serial.print(".");
-     }
-     Serial.println("");
-     Serial.println("WiFi connected");
-     // Print the IP address
-     Serial.println(WiFi.localIP());
-     udpDevice.begin(localUdpPort);
-   }
-   
-   void networkTask() {
-     uint8_t LEDServer = 0;
-     uint8_t LEDValue = 0;
-     uint8_t syncChar;
-   
-     // Serial event:
-     if (Serial.available() >= SERIALMESSAGESIZE) {
-       LEDServer = Serial.read() - '0';
-       LEDValue = Serial.read();
-       syncChar = Serial.read();
-       if ((LEDServer == 0) || (LEDServer > 3)) {
-         Serial.println("Servidor inválido (seleccione 1,2,3)");
-         return;
-       }
-       if (syncChar == '*') {
-         udpDevice.beginPacket(hosts[LEDServer - 1] , UDPPort);
-         udpDevice.write(LEDValue);
-         udpDevice.endPacket();
-       }
-     }
-     // UDP event:
-     uint8_t packetSize = udpDevice.parsePacket();
-     if (packetSize) {
-       Serial.print("Data from: ");
-       Serial.print(udpDevice.remoteIP());
-       Serial.print(":");
-       Serial.print(udpDevice.remotePort());
-       Serial.print(' ');
-       for (uint8_t i = 0; i < packetSize; i++) {
-         Serial.write(udpDevice.read());
-       }
-     }
-   }
-   
-   void aliveTask() {
-     uint32_t currentMillis;
-     static uint8_t ledState = 0;
-     currentMillis  = millis();
-     if ((currentMillis - previousMillis) >= ALIVE) {
-       previousMillis = currentMillis;
-       if (ledState == 0) {
-         digitalWrite(D0, HIGH);
-         ledState = 1;
-       }
-       else {
-         digitalWrite(D0, LOW);
-         ledState = 0;
-       }
-     }
-   }
-   
-   void loop() {
-     networkTask();
-     aliveTask();
-   }
+PASOS para realizar la comunicación:
 
-Note que a diferencia de TCP/IP, con UDP no es necesario establecer una conexión. Los pasos 
-necesario para enviar datos por UDP serán:
-
-* Crear un objeto WiFiUDP
-* Iniciar el objeto estableciendo un socket compuesto por la dirección IP y el puerto de escucha.
-* Iniciar la construcción del paquete a transmitir con beginPacket(), 
-* Popular el buffer de transmisión con write.
-* Enviar el paquete con endPacket().
-
-El código de los actuadores distribuidos será:
+1. La AI inicia una transacción enviando el byte 3E.
+2. El controlador deberá responder con el byte 4A.
+3. La AI no podrá continuar hasta no recibir la respuesta del controlador.
+   Una vez el controlador responda, la AI enviará al controlador
+   un paquete de bytes así:
 
 .. code-block:: cpp
    :lineno-start: 1
 
-    #include <WiFi.h>
-    #include <WiFiUdp.h>
+    Byte 1 : longitud
+    Byte 2 : Dirección
+    Byte 3 : Comando
+    Byte 4 a n : Datos
+    Byte n+1: verificacion
 
-    const char* ssid = "?";
-    const char* password = "?";
-    WiFiUDP udpDevice;
-    uint16_t localUdpPort = ?;
-    uint32_t previousMillis = 0;
-    #define ALIVE 1000
-    #define D0 5
-    #define D8 18
+* El byte de longitud, es el primer byte de la trama e indica cuántos bytes la AI
+  enviará a continuación, es decirm de byte 2 hasta el byte n + 1.
+* La AI calculará el byte de verificación así: Byte1 XOR Byte2 XOR … XOR ByteN.
+* En C la operación XOR se realiza utilizando el operador 
 
-    void setup() {
-        pinMode(D0, OUTPUT);     // Initialize the LED_BUILTIN pin as an output
-        digitalWrite(D0, HIGH);
-        pinMode(D8, OUTPUT);     
-        digitalWrite(D8, LOW);
-        Serial.begin(115200);
-        Serial.println();
-        Serial.println();
-        Serial.print("Connecting to ");
-        Serial.println(ssid);
+.. code-block:: cpp
+   :lineno-start: 1
 
-        WiFi.mode(WIFI_STA);
-        WiFi.begin(ssid, password);
+   ^
 
-        while (WiFi.status() != WL_CONNECTED) {
-            delay(500);
-            Serial.print(".");
-        }
-        Serial.println("");
-        Serial.println("WiFi connected");
-        // Print the IP address
-        Serial.println(WiFi.localIP());
-        udpDevice.begin(localUdpPort);
-    }
+4. El controlador esperará hasta un 1 segundo a que la trama llegue. Si esta condición
+  NO se cumple el controlador enviará a la AI el byte 3D. La AI deberá inciar de
+  nuevo la secuencia de comunicación desde el paso 1. 
+  
+  Una vez el controlador tenga la trama completa calculará el byte de cerificación
+  de la misma manera que la AI lo hizo. El resultado debe ser igual al bytes de verificación
+  recibido. Sí el byte de verificación calculado no corresponde al byte de verificación
+  recibido, el controlador enviará el byte 3F y la AI deberá reenviar la trama. 
+  Sí hay coincidencia el controlador deberá responder a la AI con el byte 4A y luego enviar
+  la siguiente secuencia de bytes:
+
+.. code-block:: cpp
+   :lineno-start: 1
+
+    Byte 1 : longitud
+    Byte 2 : Byte4 recibido
+    Byte m : Byten recibido
+    Byte m+1 : verificación
+
+5. Sí la AI recibe correctamente el paquete deberá responder con el byte 4A. 
+   El controlador quedará preparado para volver al paso 1, es decir, esperar por una nueva
+   trama. Sí ha pasado 1 segundo y el controlador no recibe el 4A, entonces deberá
+   retransmitir el paquete a la AI. Este comportamiento solo se detendrá hasta que la
+   AI envie el 4A.
 
 
-    void networkTask() {
-        uint8_t data;
-        uint8_t packetSize = udpDevice.parsePacket();
-        if (packetSize) {
-            data = udpDevice.read();
-            if (data == '1') {
-                digitalWrite(D0, HIGH);
-            } else if (data == '0') {
-                digitalWrite(D0, LOW);
-            }
-            // send back a reply, to the IP address and port we got the packet from
-            udpDevice.beginPacket(udpDevice.remoteIP(), udpDevice.remotePort());
-            udpDevice.write('1');
-            udpDevice .endPacket();
-        }
-    }
+Actividad 2
+*************
+* Fecha: octubre 14 a octubre 16 de 2020.
+* Descripción: continuar con los ejercicios
+* Recursos: ejercicios propuestos. 
+* Duración de la actividad: 5 horas de trabajo autónomo
+* Forma de trabajo: individual.
 
-    void aliveTask() {
-        uint32_t currentMillis;
-        static uint8_t ledState = 0;
-        currentMillis  = millis();
-        if ((currentMillis - previousMillis) >= ALIVE) {
-            previousMillis = currentMillis;
-            if (ledState == 0) digitalWrite(D8, HIGH);
-            else digitalWrite(D8, LOW);
-        }
-    }
-
-    void loop() {
-        networkTask();
-        aliveTask();
-    }
-
-Los pasos para recibir datos por UDP son:
-
-* Crear un objeto WiFiUDP
-* Iniciar el objeto estableciendo un socket compuesto por la dirección IP y el puerto de escucha.
-* Procesar el siguiente paquete UDP con parsePacket(). Esta acción devolverá el tamaño del paquete en bytes.
-* Luego de llamar parsePacket() será posible utilizar los métodos read() y available().
-* Leer el paquete.
-
-En el ejemplo mostrado, note que un actuador distribuido responderá al bridge con el carácter '1' cada que reciba un 
-paquete. De esta manera el bridge sabrá que el dato llegó a su destino.
-
-Ejercicio: despliegue del ejercicio
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Para desplegar este ejercicio necesitamos varios dispositivos: PC, ESP32.
-
-Para desplegar el ejercicio es necesario identificar claramente las direcciones IP de cada 
-uno de los actuadores remotos.
-
-Utilice un ESP32 para cada actuador y un ESP32 para el bridge. Como en este caso no contamos
-con tantos dispositivos entonces:
-
-* Usar el ESP32 como bridge y como actuadores el celular y el computador.
-* Utilice los programas Hercules para simular la aplicación del PC y los actuadores.
-
-Sesión 2
----------
-En esta sesión vamos a practicar las comunicaciones por UDP.
-
-RETO 
-^^^^^^
-Se trata de un programa en el PC que se comunica con un controlador ESP32. El controlador
-tiene conectados un sensor y un actuador.
-
-* Utilizar como referencia los códigos de la sesión 1.
-* Use hércules para simular un programa en el computador que solicitará al controlador
-  leer su sensor y modificar el actuador.
-* El ESP32 tendrá conectado un suiche (sensor) y un LED (actuador).
-* Desde el programa del PC debemos leer el valor del sensor y cambiar el estado del LED
-* Usted debe definir el protocolo que utilizará (por encima de UDP). Puede seleccionar 
-  entre un protocolo binario o ascii.
+Actividad 3
+*************
+* Fecha: octubre 16 de 2020 - 8 a.m.
+* Descripción: solución de dudas de los ejercicios.
+* Recursos: ingresa al grupo de Teams.
+* Duración de la actividad: 1 hora 40 minutos 
+* Forma de trabajo: colaborativo con solución de dudas en tiempo real.
