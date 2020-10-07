@@ -636,35 +636,35 @@ La versión final del código será:
 .. code-block:: cpp
    :lineno-start: 1
 
-	  class LED{
-	    private:
-	
-            uint32_t previousMillis;
-            const uint32_t interval;
-            bool taskInit = false;
-            const uint8_t ledPin;
-            uint8_t ledState = LOW;ello
-                previousMillis = 0;
-            }
-	  
-            void toggleLED(){
-                uint32_t currentMillis = millis();	
-                if ( (currentMillis - previousMillis) >= interval) {
-                    previousMillis = currentMillis;
-                    if (ledState == LOW) {
-                        ledState = HIGH;
-                    } else {
-                        ledState = LOW;
-                    }
-                    digitalWrite(ledPin, ledState);
-                }
-            }
-	  };
+    class LED{
 
-	  void setup() {
-	    task1();
-	    task2();
-	  }
+      private:
+        uint32_t previousMillis;
+        const uint32_t interval;
+        const uint8_t ledPin;
+        uint8_t ledState;
+
+      public:
+        LED(uint8_t _ledpin, uint32_t _interval): ledPin(_ledpin), interval(_interval) {
+          pinMode(_ledpin, OUTPUT);
+          previousMillis = 0;
+          ledState = LOW;
+        }
+
+        void toggleLED(){
+          
+          uint32_t currentMillis = millis();	
+          if ( (currentMillis - previousMillis) >= interval) {
+            previousMillis = currentMillis;
+            if (ledState == LOW) {
+              ledState = HIGH;
+            } else {
+              ledState = LOW;
+            }
+            digitalWrite(ledPin, ledState);
+          }
+        }
+    };
 
 	  void task1(){
 	    static LED led(3,1250);
@@ -674,6 +674,11 @@ La versión final del código será:
 	  void task2(){
 	    static LED led(5,375);
 	    led.toggleLED();
+	  }
+
+	  void setup() {
+	    task1();
+	    task2();
 	  }
 
 	  void loop() {
