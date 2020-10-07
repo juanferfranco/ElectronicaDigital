@@ -727,7 +727,7 @@ usando únicamente una tarea:
     };
 
     void setup() {
-
+      task();
     }
 
     void task(){
