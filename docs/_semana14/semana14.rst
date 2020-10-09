@@ -274,4 +274,10 @@ Actividad 3
 * Forma de trabajo: colaborativo con solución de dudas en tiempo real.
 
 Es esta sesión vamos realizar una evaluación que involucra lo aprendido en
-las últimas semanas.
+las últimas semanas. Puedes consultar la evaluación 
+`aquí <https://docs.google.com/document/d/1alXWiUnfHcntCKt9vAfJiG5WpT9bDV_4Ef76-g0uemE/edit?usp=sharing>`__
+
+Recuerda que puedes usar el simulador tinkercad para simular tu circuito.
+
+Cuando finalices la evaluación envía el archivo con el programa a 
+`este <https://auladigital.upb.edu.co/mod/assign/view.php?id=654688>`__ enlace.
