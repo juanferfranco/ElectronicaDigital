@@ -36,3 +36,7 @@ Actividad 3
 Entrega la evaluación final en `este <https://auladigital.upb.edu.co/mod/assign/view.php?id=659415>`__
 enlace.
 
+¿Qué debes entregar? Una carpeta comprimida en formato .ZIP (ojo extensión .ZIP) con:
+
+#. El modelo con la máquina de estados (40%)
+#. La implementación de la máquina de estados (60%)
