@@ -33,3 +33,6 @@ Actividad 3
 * Duración de la actividad: 1 hora 40 minutos 
 * Forma de trabajo: individual.
 
+Entrega la evaluación final en `este <https://auladigital.upb.edu.co/mod/assign/view.php?id=659415>`__
+enlace.
+
